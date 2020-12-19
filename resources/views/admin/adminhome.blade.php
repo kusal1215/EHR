@@ -1,4 +1,4 @@
-@extends('patient.master')
+@extends('admin.adminmaster')
 
 @section('content')
     <div class="content">
