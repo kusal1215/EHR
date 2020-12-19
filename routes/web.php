@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('loginRegister.login');
+});
+
+Route::get('/ehr/register', function () {
+    return view('loginRegister.register');
 });
 
 Auth::routes();
