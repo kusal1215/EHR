@@ -6,53 +6,64 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <h4 class="page-title">Add Doctor</h4>
+                    <p>{{ session('msg') }}</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
-                    <form>
+                    <form method="POST" action="{{route('AdminManager.addDoctorToDB')}}">
+                        @csrf
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>First Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text">
+                                    <input class="form-control" id="firstname"
+                                           name="firstname" type="text">
+                                    <input name="user_level" type="hidden" value="2">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Last Name</label>
-                                    <input class="form-control" type="text">
+                                    <input class="form-control" id="lastname"
+                                           name="lastname" type="text">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Username <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text">
+                                    <input class="form-control" id="name"
+                                           name="name" type="text">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Email <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="email">
+                                    <input class="form-control" id="email" type="email"
+                                           name="email" required autocomplete="email">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="form-control" type="password">
+                                    <input id="password" name="password"
+                                           class="form-control" type="password" required autocomplete="new-password">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Confirm Password</label>
-                                    <input class="form-control" type="password">
+                                    <input class="form-control" type="password"
+                                           id="password-confirm"
+                                           name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Date of Birth</label>
                                     <div class="cal-icon">
-                                        <input type="text" class="form-control datetimepicker">
+                                        <input type="text" class="form-control datetimepicker"
+                                               id="birthdate" name="birthdate">
                                     </div>
                                 </div>
                             </div>
@@ -76,38 +87,36 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>Address</label>
-                                            <input type="text" class="form-control ">
+                                            <input type="text" class="form-control"
+                                                   id="address" name="address">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                    <div class="col-sm-6 col-md-6 col-lg-4">
                                         <div class="form-group">
-                                            <label>Country</label>
-                                            <select class="form-control select">
-                                                <option>USA</option>
-                                                <option>United Kingdom</option>
+                                            <label>Doctor Specializations <span class="text-danger">*</span></label>
+                                            <select class="form-control select" required id="spec" name="spec">
+                                                <option>Dentists</option>
+                                                <option>Diagnostic radiology</option>
+                                                <option>Emergency medicine</option>
+                                                <option>Neurology</option>
+                                                <option>Opthalmology</option>
+                                                <option>Orthopedics</option>
+                                                <option>Cancer Department</option>
+                                                <option>ENT Department</option>
+                                                <option>Family medicine</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                    <div class="col-sm-6 col-md-6 col-lg-4">
                                         <div class="form-group">
                                             <label>City</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" id="city" name="city">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-3">
-                                        <div class="form-group">
-                                            <label>State/Province</label>
-                                            <select class="form-control select">
-                                                <option>California</option>
-                                                <option>Alaska</option>
-                                                <option>Alabama</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                    <div class="col-sm-6 col-md-6 col-lg-4">
                                         <div class="form-group">
                                             <label>Postal Code</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" id="postal_code" name="postal_code">
                                         </div>
                                     </div>
                                 </div>
@@ -115,7 +124,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Phone </label>
-                                    <input class="form-control" type="text">
+                                    <input class="form-control" type="text" id="phone" name="phone">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -134,25 +143,25 @@
                         </div>
                         <div class="form-group">
                             <label>Short Biography</label>
-                            <textarea class="form-control" rows="3" cols="30"></textarea>
+                            <textarea class="form-control" rows="3" cols="30" id="bio" name="bio"></textarea>
                         </div>
                         <div class="form-group">
                             <label class="display-block">Status</label>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="status" id="doctor_active" value="option1" checked>
+                                <input class="form-check-input" type="radio" name="status" id="doctor_active" value="active" checked>
                                 <label class="form-check-label" for="doctor_active">
                                     Active
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="status" id="doctor_inactive" value="option2">
+                                <input class="form-check-input" type="radio" name="status" id="doctor_inactive" value="inactive">
                                 <label class="form-check-label" for="doctor_inactive">
                                     Inactive
                                 </label>
                             </div>
                         </div>
                         <div class="m-t-20 text-center">
-                            <button class="btn btn-primary submit-btn">Create Doctor</button>
+                            <button type="submit" class="btn btn-primary submit-btn">Create Doctor</button>
                         </div>
                     </form>
                 </div>

@@ -27,6 +27,7 @@ Route::prefix('/ehr')->group(function () {
     Route::get('/admin', 'AdminController@index')->name('AdminManager.admin');
     Route::get('/admin/doctor', 'AdminController@doctor')->name('AdminManager.doctor');
     Route::get('/admin/addDoctor', 'AdminController@addDoctorPage')->name('AdminManager.addDoctor');
+    Route::post('/admin/addDoctorDB', 'AdminController@addDoctorDB')->name('AdminManager.addDoctorToDB');
 
     Route::get('/doctor', 'DoctorController@index')->name('DoctorManager.doctor');
 
