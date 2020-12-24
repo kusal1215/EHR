@@ -12,5 +12,24 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('loginRegister.login');
+});
+
+Route::get('/ehr/register', function () {
+    return view('loginRegister.register');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('/ehr')->group(function () {
+    Route::get('/admin', 'AdminController@index')->name('AdminManager.admin');
+    Route::get('/admin/doctor', 'AdminController@doctor')->name('AdminManager.doctor');
+    Route::get('/admin/addDoctor', 'AdminController@addDoctorPage')->name('AdminManager.addDoctor');
+    Route::post('/admin/addDoctorDB', 'AdminController@addDoctorDB')->name('AdminManager.addDoctorToDB');
+
+    Route::get('/doctor', 'DoctorController@index')->name('DoctorManager.doctor');
+
+    Route::get('/patient', 'PatientController@index')->name('PatientManager.patient');
 });
