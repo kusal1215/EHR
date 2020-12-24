@@ -11,7 +11,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
-                    <form method="POST" action="{{route('AdminManager.addDoctorToDB')}}">
+                    <form method="POST" action="{{route('AdminManager.addDoctorToDB')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-sm-6">
@@ -62,7 +62,7 @@
                                 <div class="form-group">
                                     <label>Date of Birth</label>
                                     <div class="cal-icon">
-                                        <input type="text" class="form-control datetimepicker"
+                                        <input type="date" class="form-control datetimepicker"
                                                id="birthdate" name="birthdate">
                                     </div>
                                 </div>
@@ -72,12 +72,12 @@
                                     <label class="gen-label">Gender:</label>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" name="gender" class="form-check-input">Male
+                                            <input type="radio" name="gender" class="form-check-input" value="male">Male
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" name="gender" class="form-check-input">Female
+                                            <input type="radio" name="gender" class="form-check-input" value="female">Female
                                         </label>
                                     </div>
                                 </div>
@@ -135,7 +135,7 @@
                                             <img alt="" src="/assets/img/user.jpg">
                                         </div>
                                         <div class="upload-input">
-                                            <input type="file" class="form-control">
+                                            <input type="file" class="form-control" name="user_image">
                                         </div>
                                     </div>
                                 </div>

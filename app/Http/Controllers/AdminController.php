@@ -13,14 +13,19 @@ class AdminController extends ParentAdminController
     }
 
     public function doctor(){
-        return view('admin.doctors');
+
+        $doctors = User::where('user_level', 2)
+                        ->orderBy('name', 'desc')
+                        ->get();
+
+        return view('admin.doctors') -> with('doctors',$doctors);
     }
 
     public function addDoctorPage(){
         return view('admin.addDoctor');
     }
 
-    public function addDoctorDB(){
+    public function addDoctorDB(Request $request){
         $user = new User();
 
         $user -> name = request('name');
@@ -38,6 +43,17 @@ class AdminController extends ParentAdminController
         $user -> phone = request('phone');
         $user -> bio = request('bio');
         $user -> status = request('status');
+
+        if ($request -> hasFile('user_image')) {
+            $file = $request -> file('user_image');
+            $extension = $file -> getClientOriginalExtension(); //getting image extension
+            $filename = time().'.'.$extension;
+            $file -> move('uploads/doctorsProfile', $filename);
+            $user -> user_image = $filename;
+        }
+        else{
+            $user -> user_image = '';
+        }
 
 //        dd($user);
 

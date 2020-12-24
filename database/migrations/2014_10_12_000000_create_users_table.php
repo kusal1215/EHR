@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('bio')->nullable();
             $table->string('status')->nullable();
+            $table->mediumText('user_image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
