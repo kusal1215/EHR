@@ -158,8 +158,8 @@
                     <li>
                         <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                     </li>
-                    <li>
-                        <a href="chat.html"><i class="fa fa-comments"></i> <span>Chat</span> <span class="badge badge-pill bg-primary float-right">5</span></a>
+                    <li class="{{ $curr_url=='/chatify'?'active':''}}">
+                        <a href="{{url('/chatify')}}"><i class="fa fa-comments"></i> <span>Chat</span> <span class="badge badge-pill bg-primary float-right">5</span></a>
                     </li>
                     <li class="submenu">
                         <a href="#"><i class="fa fa-video-camera camera"></i> <span> Calls</span> <span class="menu-arrow"></span></a>
