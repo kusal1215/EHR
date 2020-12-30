@@ -34,9 +34,23 @@ class AdminController extends ParentAdminController
         $count = $getMessages['count'];
         $messages = $getMessages['messages'];
 
+        $doctors = User::where('user_level', 2)
+            ->orderBy('name', 'desc')
+            ->get();
+
+        $patient = User::where('user_level', 3)
+            ->orderBy('name', 'desc')
+            ->get();
+
+        $doctors_count = count($doctors);
+        $patient_count = count($patient);
+
         return view('admin.adminhome',[
+            'doctors' => $doctors,
             'count' => $count,
             'messages' => $messages,
+            'doctors_count' => $doctors_count,
+            'patient_count' => $patient_count
         ]);
     }
 
