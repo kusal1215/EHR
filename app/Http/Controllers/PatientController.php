@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PatientController extends ParentPatientController
 {
-    public function index(){
-
+    public function getMessages()
+    {
         $messages = Message::join('users',  function ($join) {
             $join->on('messages.from_id', '=', 'users.id');
-//            ->orOn('messages.to_id', '=', 'users.id');
         })
-//            ->where('messages.from_id', Auth::user()->id)
             ->Where('messages.to_id', Auth::user()->id)
             ->Where('messages.seen', false)
             ->orderBy('messages.created_at', 'desc')
@@ -23,8 +21,20 @@ class PatientController extends ParentPatientController
 
         $count = count($messages);
 
-//        dd($messages);
-//        dd(count($messages));
+        // dd($messages);
+        // dd(count($messages));
+
+        return [
+            'count' => $count,
+            'messages' => $messages,
+        ];
+    }
+
+    public function index(){
+
+        $getMessages = $this->getMessages();
+        $count = $getMessages['count'];
+        $messages = $getMessages['messages'];
 
         return view('patient.home',[
             'count' => $count,
