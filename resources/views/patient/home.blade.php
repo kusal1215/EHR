@@ -377,4 +377,36 @@
             </div>
         </div>
     </div>
+    <div class="notification-box">
+        <div class="msg-sidebar notifications msg-noti">
+            <div class="topnav-dropdown-header">
+                <span>Messages</span>
+            </div>
+            <div class="drop-scroll msg-list-scroll" id="msg_list">
+                <ul class="list-box">
+                    @foreach($messages as $message)
+                    <li>
+                        <a href="{{url('/chatify')}}">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar"><img src="{{ asset('/storage/'.config('chatify.user_avatar.folder').'/'.$message->avatar) }}"></span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author">{{ $message -> name }}</span>
+                                    <span class="message-time">{{ $message -> 	created_at }}</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">{{ $message -> body }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="topnav-dropdown-footer">
+                <a href="{{url('/chatify')}}">See all messages</a>
+            </div>
+        </div>
+    </div>
+    </div>
 @endsection
