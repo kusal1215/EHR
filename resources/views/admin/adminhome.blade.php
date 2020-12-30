@@ -8,7 +8,7 @@
                 <div class="dash-widget">
                     <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
                     <div class="dash-widget-info text-right">
-                        <h3>98</h3>
+                        <h3>{{ $doctors_count }}</h3>
                         <span class="widget-title1">Doctors <i class="fa fa-check" aria-hidden="true"></i></span>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                 <div class="dash-widget">
                     <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
                     <div class="dash-widget-info text-right">
-                        <h3>1072</h3>
+                        <h3>{{ $patient_count }}</h3>
                         <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
                     </div>
                 </div>
@@ -186,76 +186,23 @@
                     </div>
                     <div class="card-body">
                         <ul class="contact-list">
-                            <li>
-                                <div class="contact-cont">
-                                    <div class="float-left user-img m-r-10">
-                                        <a href="profile.html" title="John Doe"><img src="/assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
+                            @foreach($doctors as $doctor)
+                                <li>
+                                    <div class="contact-cont">
+                                        <div class="float-left user-img m-r-10">
+                                            <a href="#" title="{{ $doctor -> name }}"><img src="{{ asset('uploads/doctorsProfile/'.$doctor -> user_image) }}" alt="null" class="w-40 rounded-circle" style="height:40px !important;"><span class="status online"></span></a>
+                                        </div>
+                                        <div class="contact-info">
+                                            <span class="contact-name text-ellipsis">{{ $doctor -> firstname }} {{ $doctor -> lastname }}</span>
+                                            <span class="contact-date">{{ $doctor -> spec }}</span>
+                                        </div>
                                     </div>
-                                    <div class="contact-info">
-                                        <span class="contact-name text-ellipsis">John Doe</span>
-                                        <span class="contact-date">MBBS, MD</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="contact-cont">
-                                    <div class="float-left user-img m-r-10">
-                                        <a href="profile.html" title="Richard Miles"><img src="/assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
-                                    </div>
-                                    <div class="contact-info">
-                                        <span class="contact-name text-ellipsis">Richard Miles</span>
-                                        <span class="contact-date">MD</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="contact-cont">
-                                    <div class="float-left user-img m-r-10">
-                                        <a href="profile.html" title="John Doe"><img src="/assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status away"></span></a>
-                                    </div>
-                                    <div class="contact-info">
-                                        <span class="contact-name text-ellipsis">John Doe</span>
-                                        <span class="contact-date">BMBS</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="contact-cont">
-                                    <div class="float-left user-img m-r-10">
-                                        <a href="profile.html" title="Richard Miles"><img src="/assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
-                                    </div>
-                                    <div class="contact-info">
-                                        <span class="contact-name text-ellipsis">Richard Miles</span>
-                                        <span class="contact-date">MS, MD</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="contact-cont">
-                                    <div class="float-left user-img m-r-10">
-                                        <a href="profile.html" title="John Doe"><img src="/assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
-                                    </div>
-                                    <div class="contact-info">
-                                        <span class="contact-name text-ellipsis">John Doe</span>
-                                        <span class="contact-date">MBBS</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="contact-cont">
-                                    <div class="float-left user-img m-r-10">
-                                        <a href="profile.html" title="Richard Miles"><img src="/assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status away"></span></a>
-                                    </div>
-                                    <div class="contact-info">
-                                        <span class="contact-name text-ellipsis">Richard Miles</span>
-                                        <span class="contact-date">MBBS, MD</span>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="card-footer text-center bg-white">
-                        <a href="doctors.html" class="text-muted">View all Doctors</a>
+                        <a href="{{route('AdminManager.doctor')}}" class="text-muted">View all Doctors</a>
                     </div>
                 </div>
             </div>
