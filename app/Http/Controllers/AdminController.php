@@ -3,26 +3,84 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Chatify\Http\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends ParentAdminController
 {
+    public function getMessages()
+    {
+        $messages = Message::join('users',  function ($join) {
+            $join->on('messages.from_id', '=', 'users.id');
+        })
+            ->Where('messages.to_id', Auth::user()->id)
+            ->Where('messages.seen', false)
+            ->orderBy('messages.created_at', 'desc')
+            ->get();
+
+        $count = count($messages);
+
+        return [
+            'count' => $count,
+            'messages' => $messages,
+        ];
+    }
+
     public function index(){
-        return view('admin.adminhome');
+
+        $getMessages = $this->getMessages();
+        $count = $getMessages['count'];
+        $messages = $getMessages['messages'];
+
+        $doctors = User::where('user_level', 2)
+            ->orderBy('name', 'desc')
+            ->get();
+
+        $patient = User::where('user_level', 3)
+            ->orderBy('name', 'desc')
+            ->get();
+
+        $doctors_count = count($doctors);
+        $patient_count = count($patient);
+
+        return view('admin.adminhome',[
+            'doctors' => $doctors,
+            'count' => $count,
+            'messages' => $messages,
+            'doctors_count' => $doctors_count,
+            'patient_count' => $patient_count
+        ]);
     }
 
     public function doctor(){
+
+        $getMessages = $this->getMessages();
+        $count = $getMessages['count'];
+        $messages = $getMessages['messages'];
 
         $doctors = User::where('user_level', 2)
                         ->orderBy('name', 'desc')
                         ->get();
 
-        return view('admin.doctors') -> with('doctors',$doctors);
+        return view('admin.doctors' ,[
+            'doctors' => $doctors,
+            'count' => $count,
+            'messages' => $messages,
+        ]);
     }
 
     public function addDoctorPage(){
-        return view('admin.addDoctor');
+
+        $getMessages = $this->getMessages();
+        $count = $getMessages['count'];
+        $messages = $getMessages['messages'];
+
+        return view('admin.addDoctor' ,[
+            'count' => $count,
+            'messages' => $messages,
+        ]);
     }
 
     public function addDoctorDB(Request $request){
