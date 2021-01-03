@@ -10,21 +10,23 @@
         </div>
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
-                <form>
+                <form  method="POST" action="{{ route('AdminAppointmentManager.addAppointmentsToDB') }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Appointment ID</label>
-                                <input class="form-control" type="text" value="APT-0001" readonly="">
+                                <input name="aptId" id="aptId" class="form-control" type="text" value="APT-{{ $number }}" readonly="">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Patient Name</label>
-                                <select class="select">
+                                <select class="form-control" id="patientId" name="patientId" required>
                                     <option>Select</option>
-                                    <option>Jennifer Robinson</option>
-                                    <option>Terry Baker</option>
+                                    @foreach( $patients as $patient)
+                                    <option value="{{ $patient -> id }}">{{ $patient -> name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -32,8 +34,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Department</label>
-                                <select class="select">
+                                <label>Department</label><br>
+                                <select id="dept" name="dept" class="form-control" required>
                                     <option>Select</option>
                                     <option>Dentists</option>
                                     <option>Neurology</option>
@@ -47,11 +49,11 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Doctor</label>
-                                <select class="select">
+                                <select id="doctorId" name="doctorId" class="form-control" required>
                                     <option>Select</option>
-                                    <option>Cristina Groves</option>
-                                    <option>Marie Wells</option>
-                                    <option>Henry Daniels</option>
+                                    @foreach( $doctors as $doctor)
+                                        <option value="{{ $doctor -> id }}">{{ $doctor -> firstname }} {{ $doctor -> lastname }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -61,7 +63,7 @@
                             <div class="form-group">
                                 <label>Date</label>
                                 <div class="cal-icon">
-                                    <input type="text" class="form-control datetimepicker">
+                                    <input id="aptDate" name="aptDate" type="text" class="form-control datetimepicker" required>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +71,7 @@
                             <div class="form-group">
                                 <label>Time</label>
                                 <div class="time-icon">
-                                    <input type="text" class="form-control" id="datetimepicker3">
+                                    <input type="text" name="aptTime" class="form-control" id="datetimepicker3" required>
                                 </div>
                             </div>
                         </div>
@@ -78,19 +80,19 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Patient Email</label>
-                                <input class="form-control" type="email">
+                                <input id="aptEmail" name="aptEmail" class="form-control" type="email" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Patient Phone Number</label>
-                                <input class="form-control" type="text">
+                                <input  id="aptPhoneNo" name="aptPhoneNo" class="form-control" type="text" required>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Message</label>
-                        <textarea cols="30" rows="4" class="form-control"></textarea>
+                        <textarea id="aptMsg" name="aptMsg" cols="30" rows="4" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
                         <label class="display-block">Appointment Status</label>
@@ -108,7 +110,7 @@
                         </div>
                     </div>
                     <div class="m-t-20 text-center">
-                        <button class="btn btn-primary submit-btn">Create Appointment</button>
+                        <button type="submit" class="btn btn-primary submit-btn">Create Appointment</button>
                     </div>
                 </form>
             </div>

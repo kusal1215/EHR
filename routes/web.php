@@ -32,7 +32,8 @@ Route::prefix('/ehr')->group(function () {
     Route::post('/admin/addDoctorDB', 'AdminController@addDoctorDB')->name('AdminManager.addDoctorToDB');
 //    appointment part
     Route::get('/admin/appointments', 'AdminAppointmentController@appointment')->name('AdminAppointmentManager.appointments');
-    Route::get('/admin/addAppointments', 'AdminAppointmentController@addAppointment')->name('AdminAppointmentManager.addAppointments');
+    Route::get('/admin/addAppointments', 'AdminAppointmentController@loadAddAppointment')->name('AdminAppointmentManager.addAppointments');
+    Route::post('/admin/addAppointmentsDB', 'AdminAppointmentController@addAppointmentDB')->name('AdminAppointmentManager.addAppointmentsToDB');
 
 //    doctor
     Route::get('/doctor', 'DoctorController@index')->name('DoctorManager.doctor');
