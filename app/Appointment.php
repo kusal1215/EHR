@@ -10,4 +10,14 @@ class Appointment extends Model
         'doctor_id', 'patient_id', 'department', 'date', 'time', 'patient_email',
         'patient_phone_no' ,'message' , 'seen' ,
     ];
+
+    public function doctor()
+    {
+        return $this->belongsTo('app\User' ,'doctor_id');
+    }
+
+    public function patient()
+    {
+        return $this->belongsTo('app\User','patient_id');
+    }
 }

@@ -36,9 +36,12 @@ class AdminAppointmentController extends ParentAdminController
         $count = $getMessages['count'];
         $messages = $getMessages['messages'];
 
+        $appointments = Appointment::all();
+
         return view('admin.appointment',[
             'count' => $count,
             'messages' => $messages,
+            'appointments' => $appointments
         ]);
     }
 
@@ -75,6 +78,8 @@ class AdminAppointmentController extends ParentAdminController
 
     public function addAppointmentDB(Request $request)
     {
+        $appointments = Appointment::all();
+
         $getMessages = $this->getMessages();
         $count = $getMessages['count'];
         $messages = $getMessages['messages'];
@@ -98,6 +103,7 @@ class AdminAppointmentController extends ParentAdminController
         return view('admin.appointment',[
             'count' => $count,
             'messages' => $messages,
+            'appointments' => $appointments
         ]) -> with('msg','Data inserted successfully');
 
     }
