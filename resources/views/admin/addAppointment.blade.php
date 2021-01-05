@@ -92,7 +92,7 @@
                     </div>
                     <div class="form-group">
                         <label>Message</label>
-                        <textarea id="aptMsg" name="aptMsg" cols="30" rows="4" class="form-control"></textarea>
+                        <textarea id="aptMsg" name="aptMsg" cols="30" rows="4" class="form-control" required></textarea>
                     </div>
                     <div class="form-group">
                         <label class="display-block">Appointment Status</label>

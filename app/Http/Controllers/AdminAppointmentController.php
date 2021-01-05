@@ -107,4 +107,10 @@ class AdminAppointmentController extends ParentAdminController
         ]) -> with('msg','Data inserted successfully');
 
     }
+
+    public function destroy($id)
+    {
+        $data = Appointment::findOrFail($id);
+        $data->delete();
+    }
 }
