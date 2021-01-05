@@ -36,12 +36,12 @@
                                 <td>{{ $appointment -> department }}</td>
                                 <td>{{ $appointment -> date }}</td>
                                 <td>{{ $appointment -> time }}</td>
-                                <td><span class="custom-badge {{ $appointment -> seen == false ?'status-red':'status-green'}}">{{ $appointment -> seen == false ?'Unseen':'Seen' }}</span></td>
+                                <td><span class="custom-badge {{ $appointment -> seen == false ?'status-red':'status-green'}}">{{ $appointment -> seen == false ?'Pending Appointment':'Completed' }}</span></td>
                                 <td class="text-right">
                                     <div class="dropdown dropdown-action">
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="edit-appointment.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                            <a class="dropdown-item" href="{{url('/ehr/admin/editAppointment')}}/{{$appointment -> id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                             <a class="dropdown-item delete" id="{{ $appointment -> id }}" href="#" data-toggle="modal"
 
                                             ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
@@ -122,7 +122,7 @@
                     success:function (data){
                         setTimeout(function (){
                             $('#delete_appointment').modal('hide');
-                            alert('Data Deleted');
+                            // alert('Data Deleted');
                             window.location.reload();
                         },2000);
                     }

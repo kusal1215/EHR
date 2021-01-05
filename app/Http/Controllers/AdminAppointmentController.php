@@ -100,11 +100,11 @@ class AdminAppointmentController extends ParentAdminController
 
         $appointment -> save();
 
-        return view('admin.appointment',[
+        return redirect('/ehr/admin/appointments') -> with([
             'count' => $count,
             'messages' => $messages,
             'appointments' => $appointments
-        ]) -> with('msg','Data inserted successfully');
+        ]);
 
     }
 
@@ -113,4 +113,55 @@ class AdminAppointmentController extends ParentAdminController
         $data = Appointment::findOrFail($id);
         $data->delete();
     }
+
+    public function editAppointment($id) {
+
+        $getMessages = $this->getMessages();
+        $count = $getMessages['count'];
+        $messages = $getMessages['messages'];
+
+        $appointment = Appointment::findorFail($id);
+
+        return view('admin.editAppointment', [
+            'count' => $count,
+            'messages' => $messages,
+            'appointment' => $appointment,
+        ]);
+
+    }
+
+    public function updateAppointment($id){
+
+        $getMessages = $this->getMessages();
+        $count = $getMessages['count'];
+        $messages = $getMessages['messages'];
+
+        $appointments = Appointment::all();
+
+        $appointment = Appointment::findorFail($id);
+        if(!is_null($appointment)){
+
+            $appointment -> aptId = request('aptId');
+            $appointment -> patient_id = request('patientId');
+            $appointment -> department = request('dept');
+            $appointment -> doctor_id = request('doctorId');
+            $appointment -> date = request('aptDate');
+            $appointment -> time = request('aptTime');
+            $appointment -> patient_email = request('aptEmail');
+            $appointment -> patient_phone_no = request('aptPhoneNo');
+            $appointment -> message = request('aptMsg');
+            $appointment -> seen = request('status');
+
+//            dd($appointment);
+
+            $appointment->update();
+        }
+
+        return redirect('/ehr/admin/appointments') -> with([
+            'count' => $count,
+            'messages' => $messages,
+            'appointments' => $appointments
+        ]);
+    }
+
 }

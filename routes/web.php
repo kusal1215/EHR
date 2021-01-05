@@ -35,6 +35,8 @@ Route::prefix('/ehr')->group(function () {
     Route::get('/admin/addAppointments', 'AdminAppointmentController@loadAddAppointment')->name('AdminAppointmentManager.addAppointments');
     Route::post('/admin/addAppointmentsDB', 'AdminAppointmentController@addAppointmentDB')->name('AdminAppointmentManager.addAppointmentsToDB');
     Route::get('/admin/deleteAppointment/{id}', 'AdminAppointmentController@destroy')->name('AdminAppointmentManager.deleteAppointment');
+    Route::get('/admin/editAppointment/{id}', 'AdminAppointmentController@editAppointment')->name('AdminAppointmentManager.editAppointment');
+    Route::post('/admin/updateAppointment/{id}', 'AdminAppointmentController@updateAppointment')->name('AdminAppointmentManager.updateAppointment');
 
 //    doctor
     Route::get('/doctor', 'DoctorController@index')->name('DoctorManager.doctor');
