@@ -24,12 +24,23 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('/ehr')->group(function () {
+//    admin
     Route::get('/admin', 'AdminController@index')->name('AdminManager.admin');
+//    add doctor part
     Route::get('/admin/doctor', 'AdminController@doctor')->name('AdminManager.doctor');
     Route::get('/admin/addDoctor', 'AdminController@addDoctorPage')->name('AdminManager.addDoctor');
     Route::post('/admin/addDoctorDB', 'AdminController@addDoctorDB')->name('AdminManager.addDoctorToDB');
+//    appointment part
+    Route::get('/admin/appointments', 'AdminAppointmentController@appointment')->name('AdminAppointmentManager.appointments');
+    Route::get('/admin/addAppointments', 'AdminAppointmentController@loadAddAppointment')->name('AdminAppointmentManager.addAppointments');
+    Route::post('/admin/addAppointmentsDB', 'AdminAppointmentController@addAppointmentDB')->name('AdminAppointmentManager.addAppointmentsToDB');
+    Route::get('/admin/deleteAppointment/{id}', 'AdminAppointmentController@destroy')->name('AdminAppointmentManager.deleteAppointment');
+    Route::get('/admin/editAppointment/{id}', 'AdminAppointmentController@editAppointment')->name('AdminAppointmentManager.editAppointment');
+    Route::post('/admin/updateAppointment/{id}', 'AdminAppointmentController@updateAppointment')->name('AdminAppointmentManager.updateAppointment');
 
+//    doctor
     Route::get('/doctor', 'DoctorController@index')->name('DoctorManager.doctor');
 
+//    patient
     Route::get('/patient', 'PatientController@index')->name('PatientManager.patient');
 });

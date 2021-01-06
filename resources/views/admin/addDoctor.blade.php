@@ -62,7 +62,7 @@
                                 <div class="form-group">
                                     <label>Date of Birth</label>
                                     <div class="cal-icon">
-                                        <input type="date" class="form-control datetimepicker"
+                                        <input type="text" class="form-control datetimepicker"
                                                id="birthdate" name="birthdate">
                                     </div>
                                 </div>
