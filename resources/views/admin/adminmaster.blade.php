@@ -100,7 +100,7 @@
                 </div>
             </li>
             <li class="nav-item dropdown d-none d-sm-block">
-                <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>
+                <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">{{ $count }}</span></a>
             </li>
             <li class="nav-item dropdown has-arrow">
                 <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
@@ -158,8 +158,8 @@
                     <li>
                         <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                     </li>
-                    <li>
-                        <a href="chat.html"><i class="fa fa-comments"></i> <span>Chat</span> <span class="badge badge-pill bg-primary float-right">5</span></a>
+                    <li class="{{ $curr_url=='/chatify'?'active':''}}">
+                        <a href="{{url('/chatify')}}"><i class="fa fa-comments"></i> <span>Chat</span> <span class="badge badge-pill bg-primary float-right">{{ $count }}</span></a>
                     </li>
                     <li class="submenu">
                         <a href="#"><i class="fa fa-video-camera camera"></i> <span> Calls</span> <span class="menu-arrow"></span></a>
