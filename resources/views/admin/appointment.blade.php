@@ -1,5 +1,11 @@
 @extends('admin.adminmaster')
 
+@section('header')
+{{--    <link rel="stylesheet" type="text/css" href="/assets/css/dataTables.bootstrap4.min.css">--}}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+
+@endsection
+
 @section('content')
     <div class="page-wrapper">
         <div class="content">
@@ -14,7 +20,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table class="table table-striped custom-table" id="user_table">
+                        <table class="mydatadable table table-stripped" id="user_table">
                             <thead>
                             <tr>
                                 <th>Appointment ID</th>
@@ -130,5 +136,14 @@
             });
         });
     </script>
+    <script>
+        $(document).ready( function () {
+            $('.mydatadable').DataTable();
+        } );
+    </script>
+{{--    <script src="/assets/js/jquery.dataTables.min.js"></script>--}}
+{{--    <script src="/assets/js/dataTables.bootstrap4.min.js"></script>--}}
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 @endsection
 
