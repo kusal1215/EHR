@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Appointment;
 use App\User;
 use Chatify\Http\Models\Message;
 use Illuminate\Http\Request;
@@ -34,23 +35,32 @@ class AdminController extends ParentAdminController
         $count = $getMessages['count'];
         $messages = $getMessages['messages'];
 
-        $doctors = User::where('user_level', 2)
-            ->orderBy('name', 'desc')
-            ->get();
+        $doctors = User::where('user_level', 2) ->orderBy('name', 'desc') ->get();
+        $patient = User::where('user_level', 3) ->orderBy('name', 'desc') ->get();
 
-        $patient = User::where('user_level', 3)
-            ->orderBy('name', 'desc')
-            ->get();
+        $attend_patients_count = Appointment::where('seen', 1) -> get();
+        $pendings_patients_count = Appointment::where('seen', 0) -> get();
+
+        $attend = Appointment::where('seen', 1) -> paginate(5);
+        $pendings = Appointment::where('seen', 0) -> paginate(5);
+
+        $appointments = Appointment::paginate(5);
 
         $doctors_count = count($doctors);
         $patient_count = count($patient);
+        $attend_count = count($attend_patients_count);
+        $pending_count = count($pendings_patients_count);
 
         return view('admin.adminhome',[
             'doctors' => $doctors,
             'count' => $count,
             'messages' => $messages,
             'doctors_count' => $doctors_count,
-            'patient_count' => $patient_count
+            'patient_count' => $patient_count,
+            'attend_count' => $attend_count,
+            'pending_count' => $pending_count,
+            'pendings' => $pendings,
+            'appointments' => $appointments,
         ]);
     }
 

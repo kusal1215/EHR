@@ -26,7 +26,7 @@
                 <div class="dash-widget">
                     <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
                     <div class="dash-widget-info text-right">
-                        <h3>72</h3>
+                        <h3>{{ $attend_count }}</h3>
                         <span class="widget-title3">Attend <i class="fa fa-check" aria-hidden="true"></i></span>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                 <div class="dash-widget">
                     <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
                     <div class="dash-widget-info text-right">
-                        <h3>618</h3>
+                        <h3>{{ $pending_count }}</h3>
                         <span class="widget-title4">Pending <i class="fa fa-check" aria-hidden="true"></i></span>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
             <div class="col-12 col-md-6 col-lg-8 col-xl-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title d-inline-block">Upcoming Appointments</h4> <a href="appointments.html" class="btn btn-primary float-right">View all</a>
+                        <h4 class="card-title d-inline-block">Upcoming Appointments</h4> <a href="{{route('AdminAppointmentManager.appointments')}}" class="btn btn-primary float-right">View all</a>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -88,91 +88,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
+                                @foreach($pendings as $pending)
+                                    <tr>
                                     <td style="min-width: 200px;">
                                         <a class="avatar" href="profile.html">B</a>
-                                        <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
+                                        <h2><a href="profile.html">{{ $pending -> patient -> name }}<span>{{ $pending -> patient -> email }}</span></a></h2>
                                     </td>
                                     <td>
                                         <h5 class="time-title p-0">Appointment With</h5>
-                                        <p>Dr. Cristina Groves</p>
+                                        <p>Dr. {{ $pending -> doctor -> name }}</p>
                                     </td>
                                     <td>
                                         <h5 class="time-title p-0">Timing</h5>
-                                        <p>7.00 PM</p>
+                                        <p>{{ $pending -> time }}</p>
                                     </td>
                                     <td class="text-right">
-                                        <a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
+                                        <a href="{{url('/ehr/admin/editAppointment')}}/{{$pending -> id}}" class="btn btn-outline-primary take-btn">Take up</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td style="min-width: 200px;">
-                                        <a class="avatar" href="profile.html">B</a>
-                                        <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Appointment With</h5>
-                                        <p>Dr. Cristina Groves</p>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Timing</h5>
-                                        <p>7.00 PM</p>
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="min-width: 200px;">
-                                        <a class="avatar" href="profile.html">B</a>
-                                        <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Appointment With</h5>
-                                        <p>Dr. Cristina Groves</p>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Timing</h5>
-                                        <p>7.00 PM</p>
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="min-width: 200px;">
-                                        <a class="avatar" href="profile.html">B</a>
-                                        <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Appointment With</h5>
-                                        <p>Dr. Cristina Groves</p>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Timing</h5>
-                                        <p>7.00 PM</p>
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="min-width: 200px;">
-                                        <a class="avatar" href="profile.html">B</a>
-                                        <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Appointment With</h5>
-                                        <p>Dr. Cristina Groves</p>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Timing</h5>
-                                        <p>7.00 PM</p>
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-                                    </td>
-                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -217,42 +151,17 @@
                         <div class="table-responsive">
                             <table class="table mb-0 new-patient-table">
                                 <tbody>
-                                <tr>
+                                @foreach($appointments as $appointment)
+                                    <tr>
                                     <td>
                                         <img width="28" height="28" class="rounded-circle" src="/assets/img/user.jpg" alt="">
-                                        <h2>John Doe</h2>
+                                        <h2>{{ $appointment -> patient -> name }}</h2>
                                     </td>
-                                    <td>Johndoe21@gmail.com</td>
-                                    <td>+1-202-555-0125</td>
-                                    <td><button class="btn btn-primary btn-primary-one float-right">Fever</button></td>
+                                    <td>{{ $appointment -> patient_email }}</td>
+                                    <td>{{ $appointment -> patient_phone_no }}</td>
+                                    <td><button class="btn btn-primary btn-primary-one float-right">{{ $appointment -> department }}</button></td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <img width="28" height="28" class="rounded-circle" src="/assets/img/user.jpg" alt="">
-                                        <h2>Richard</h2>
-                                    </td>
-                                    <td>Richard123@yahoo.com</td>
-                                    <td>202-555-0127</td>
-                                    <td><button class="btn btn-primary btn-primary-two float-right">Cancer</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img width="28" height="28" class="rounded-circle" src="/user.jpg" alt="">
-                                        <h2>Villiam</h2>
-                                    </td>
-                                    <td>Richard123@yahoo.com</td>
-                                    <td>+1-202-555-0106</td>
-                                    <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img width="28" height="28" class="rounded-circle" src="/assets/img/user.jpg" alt="">
-                                        <h2>Martin</h2>
-                                    </td>
-                                    <td>Richard123@yahoo.com</td>
-                                    <td>776-2323 89562015</td>
-                                    <td><button class="btn btn-primary btn-primary-four float-right">Fever</button></td>
-                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
