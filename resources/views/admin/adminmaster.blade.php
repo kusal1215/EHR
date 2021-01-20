@@ -4,11 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
-    <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+    <title>EHR</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-datetimepicker.min.css">
+
+    @yield('header')
+
     <script src="/assets/js/html5shiv.min.js"></script>
     <script src="/assets/js/respond.min.js"></script>
     @php
@@ -149,8 +155,8 @@
                     <li>
                         <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                     </li>
-                    <li>
-                        <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
+                    <li class="{{ $curr_url=='AdminAppointmentManager.appointments'?'active':''}}">
+                        <a href="{{route('AdminAppointmentManager.appointments')}}"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                     </li>
                     <li>
                         <a href="schedule.html"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
@@ -199,7 +205,42 @@
 <script src="/assets/js/Chart.bundle.js"></script>
 <script src="/assets/js/chart.js"></script>
 <script src="/assets/js/app.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="/assets/js/moment.min.js"></script>
+<script src="/assets/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+    $(function () {
+        $('#datetimepicker3').datetimepicker({
+            format: 'LT'
 
+        });
+    });
+</script>
+
+<script>
+    $('select').select2({
+        matcher: function(params, data) {
+            // If there are no search terms, return all of the data
+            if ($.trim(params.term) === '') { return data; }
+
+            // Do not display the item if there is no 'text' property
+            if (typeof data.text === 'undefined') { return null; }
+
+            // `params.term` is the user's search term
+            // `data.id` should be checked against
+            // `data.text` should be checked against
+            var q = params.term.toLowerCase();
+            if (data.text.toLowerCase().indexOf(q) > -1 || data.id.toLowerCase().indexOf(q) > -1) {
+                return $.extend({}, data, true);
+            }
+
+            // Return `null` if the term should not be displayed
+            return null;
+        }
+    });
+</script>
+
+@yield('js')
 </body>
 
 
