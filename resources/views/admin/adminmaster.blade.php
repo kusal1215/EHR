@@ -152,8 +152,8 @@
                     <li class="{{ $curr_url=='AdminManager.doctor'?'active':''}}">
                         <a href="{{route('AdminManager.doctor')}}"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                     </li>
-                    <li>
-                        <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                    <li class="{{ $curr_url=='AdminPatientManager.patients'?'active':''}}">
+                        <a href="{{route('AdminPatientManager.patients')}}"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                     </li>
                     <li class="{{ $curr_url=='AdminAppointmentManager.appointments'?'active':''}}">
                         <a href="{{route('AdminAppointmentManager.appointments')}}"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
