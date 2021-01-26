@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
+    @yield('header')
+
     <script src="/assets/js/html5shiv.min.js"></script>
     <script src="/assets/js/respond.min.js"></script>
     @php
@@ -194,6 +197,7 @@
 <script src="/assets/js/chart.js"></script>
 <script src="/assets/js/app.js"></script>
 
+@yield('js')
 </body>
 
 
