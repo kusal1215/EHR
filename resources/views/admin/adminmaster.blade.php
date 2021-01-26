@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('/assets/img/favicon.ico')}}">
     <title>EHR</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/style.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/select2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/bootstrap-datetimepicker.min.css')}}">
 
     @yield('header')
 
-    <script src="/assets/js/html5shiv.min.js"></script>
-    <script src="/assets/js/respond.min.js"></script>
+    <script src="{{asset('/assets/js/html5shiv.min.js')}}"></script>
+    <script src="{{asset('/assets/js/respond.min.js')}}"></script>
     @php
         $curr_url = Route::currentRouteName();
     @endphp
@@ -27,7 +27,7 @@
     <div class="header">
         <div class="header-left">
             <a href="{{url('/patient')}}" class="logo">
-                <img src="/assets/img/logo.png" width="35" height="35" alt=""> <span>EHR</span>
+                <img src="{{asset('/assets/img/logo.png')}}" width="35" height="35" alt=""> <span>EHR</span>
             </a>
         </div>
         <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
@@ -45,7 +45,7 @@
                                 <a href="activities.html">
                                     <div class="media">
 											<span class="avatar">
-												<img alt="John Doe" src="/assets/img/user.jpg" class="img-fluid">
+												<img alt="John Doe" src="{{asset('/assets/img/user.jpg')}}" class="img-fluid">
 											</span>
                                         <div class="media-body">
                                             <p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
@@ -111,7 +111,7 @@
             <li class="nav-item dropdown has-arrow">
                 <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img">
-							<img class="rounded-circle" src="/assets/img/user.jpg" width="24" alt="Admin">
+							<img class="rounded-circle" src="{{asset('/assets/img/user.jpg')}}" width="24" alt="Admin">
 							<span class="status online"></span>
 						</span>
                     <span>{{ Auth::user()->name }}</span>
@@ -152,8 +152,8 @@
                     <li class="{{ $curr_url=='AdminManager.doctor'?'active':''}}">
                         <a href="{{route('AdminManager.doctor')}}"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                     </li>
-                    <li>
-                        <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                    <li class="{{ $curr_url=='AdminPatientManager.patients'?'active':''}}">
+                        <a href="{{route('AdminPatientManager.patients')}}"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                     </li>
                     <li class="{{ $curr_url=='AdminAppointmentManager.appointments'?'active':''}}">
                         <a href="{{route('AdminAppointmentManager.appointments')}}"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
@@ -198,16 +198,16 @@
     @yield('content')
 </div>
 <div class="sidebar-overlay" data-reff=""></div>
-<script src="/assets/js/jquery-3.2.1.min.js"></script>
-<script src="/assets/js/popper.min.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/jquery.slimscroll.js"></script>
-<script src="/assets/js/Chart.bundle.js"></script>
-<script src="/assets/js/chart.js"></script>
-<script src="/assets/js/app.js"></script>
-<script src="/assets/js/select2.min.js"></script>
-<script src="/assets/js/moment.min.js"></script>
-<script src="/assets/js/bootstrap-datetimepicker.min.js"></script>
+<script src="{{asset('/assets/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('/assets/js/popper.min.js')}}"></script>
+<script src="{{asset('/assets/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('/assets/js/jquery.slimscroll.js')}}"></script>
+<script src="{{asset('/assets/js/Chart.bundle.js')}}"></script>
+<script src="{{asset('/assets/js/chart.js')}}"></script>
+<script src="{{asset('/assets/js/app.js')}}"></script>
+<script src="{{asset('/assets/js/select2.min.js')}}"></script>
+<script src="{{asset('/assets/js/moment.min.js')}}"></script>
+<script src="{{asset('/assets/js/bootstrap-datetimepicker.min.js')}}"></script>
 <script>
     $(function () {
         $('#datetimepicker3').datetimepicker({
