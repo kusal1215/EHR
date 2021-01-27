@@ -8,6 +8,7 @@ use Chatify\Http\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use function PHPUnit\Framework\isEmpty;
 
 class AdminAppointmentController extends ParentAdminController
@@ -55,6 +56,8 @@ class AdminAppointmentController extends ParentAdminController
 
         $patients = User::where('user_level', 3) ->get();
         $doctors = User::where('user_level', 2) ->get();
+        $doctors_count = count($doctors);
+        $patients_count = count($patients);
 
         $appointment = DB::table('appointments')->orderBy('updated_at', 'desc')->first();
         $appointments = Appointment::all();
@@ -73,6 +76,8 @@ class AdminAppointmentController extends ParentAdminController
             'patients' => $patients,
             'doctors' => $doctors,
             'number' => $number,
+            'doctors_count' => $doctors_count,
+            'patients_count' => $patients_count,
         ]);
     }
 

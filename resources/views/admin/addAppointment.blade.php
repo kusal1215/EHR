@@ -95,7 +95,7 @@
                         <textarea id="aptMsg" name="aptMsg" cols="30" rows="4" class="form-control" required></textarea>
                     </div>
                     <div class="m-t-20 text-center">
-                        <button type="submit" class="btn btn-primary submit-btn">Create Appointment</button>
+                        <button type="submit" class="btn btn-primary submit-btn" {{ $doctors_count== 0 || $patients_count == 0 ?'disabled':''}}>Create Appointment</button>
                     </div>
                 </form>
             </div>
