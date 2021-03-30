@@ -2,46 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Appointment;
 use App\User;
-use Chatify\Http\Models\Message;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use services\ModalHelper\MessageHelper;
+use services\ModalHelper\UserHelper;
 
 class AdminPatientController extends ParentAdminController
 {
-    public function getMessages()
-    {
-        $messages = Message::join('users',  function ($join) {
-            $join->on('messages.from_id', '=', 'users.id');
-        })
-            ->Where('messages.to_id', Auth::user()->id)
-            ->Where('messages.seen', false)
-            ->orderBy('messages.created_at', 'desc')
-            ->get();
-
-        $count = count($messages);
-
-        return [
-            'count' => $count,
-            'messages' => $messages,
-        ];
-    }
 
     public function patients()
     {
-        $getMessages = $this->getMessages();
-        $count = $getMessages['count'];
-        $messages = $getMessages['messages'];
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
 
-        $patients = User::where('user_level', 3)->get();
+        $response['patients'] = UserHelper::getPatients();
 
-//        dd($user);
-
-        return view('admin.patients.patients',[
-            'count' => $count,
-            'messages' => $messages,
-            'patients' => $patients
-        ]);
+        return view('admin.patients.patients')->with($response);
     }
 }
