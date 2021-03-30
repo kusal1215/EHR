@@ -56,7 +56,7 @@ class AdminAppointmentController extends ParentAdminController
 
         $getMessages = MessageHelper::getMessages(Auth::user()->id);
         $response['count'] = $getMessages['count'];
-        $response['response'] = $getMessages['messages'];
+        $response['messages'] = $getMessages['messages'];
 
         $response['appointment'] = AppointmentHelper::create($request->all());
 
@@ -85,7 +85,7 @@ class AdminAppointmentController extends ParentAdminController
 
         $getMessages = MessageHelper::getMessages(Auth::user()->id);
         $response['count'] = $getMessages['count'];
-        $response['response'] = $getMessages['messages'];
+        $response['messages'] = $getMessages['messages'];
 
         $response['appointments'] = AppointmentHelper::getAll();
 

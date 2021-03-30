@@ -15,7 +15,7 @@ class PatientController extends ParentPatientController
     {
         $getMessages = MessageHelper::getMessages(Auth::user()->id);
         $response['count'] = $getMessages['count'];
-        $response['response'] = $getMessages['messages'];
+        $response['messages'] = $getMessages['messages'];
 
         return view('patient.home')->with($response);
     }
