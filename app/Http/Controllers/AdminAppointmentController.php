@@ -29,7 +29,7 @@ class AdminAppointmentController extends ParentAdminController
 
     public function loadAddAppointment()
     {
-        $number = 0;
+        $response['number'] = 0;
 
         $getMessages = MessageHelper::getMessages(Auth::user()->id);
         $response['count'] = $getMessages['count'];
@@ -42,9 +42,9 @@ class AdminAppointmentController extends ParentAdminController
         $response['appointments'] = AppointmentHelper::getAll();
 
         if ($response['appointments']->isEmpty()) {
-            $number =  $number + 1;
+            $response['number'] =  $response['number'] + 1;
         } else {
-            $number =  $number + $response['appointment']->id + 1;
+            $response['number'] =  $response['number'] + $response['appointment']->id + 1;
         }
 
         return view('admin.addAppointment')->with($response);
@@ -58,7 +58,7 @@ class AdminAppointmentController extends ParentAdminController
         $response['count'] = $getMessages['count'];
         $response['response'] = $getMessages['messages'];
 
-        $appointment = AppointmentHelper::create($request->all());
+        $response['appointment'] = AppointmentHelper::create($request->all());
 
         return redirect('/ehr/admin/appointments')->with($response);
     }
