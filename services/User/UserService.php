@@ -88,4 +88,13 @@ class UserService
 
         $this->create($data);
     }
+
+    public function updateDoctor($id, $data)
+    {
+        $doctor = $this->get($id);
+
+        if ($doctor) {
+            $this->update($doctor, $data);
+        }
+    }
 }

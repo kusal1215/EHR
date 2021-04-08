@@ -21,7 +21,7 @@
                         <div class="dropdown profile-action">
                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                <a class="dropdown-item" href="{{url('/ehr/admin/editDoctor')}}/{{$doctor -> id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a> \
                                 <a class="dropdown-item delete" href="#" data-toggle="modal" id="{{ $doctor -> id }}"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                     success:function (data){
                         setTimeout(function (){
                             $('#delete_doctor').modal('hide');
-                            alert('Data Deleted');
+                            // alert('Data Deleted');
                             window.location.reload();
                         },2000);
                     }

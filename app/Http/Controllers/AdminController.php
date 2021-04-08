@@ -73,4 +73,30 @@ class AdminController extends ParentAdminController
 
         return redirect('/ehr/admin/addDoctor')->with('msg', 'Data inserted successfully');
     }
+
+    public function editDoctor($id)
+    {
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
+
+        $response['doctor'] = UserHelper::get($id);
+
+//        dd($response);
+
+        return view('admin.editDoctorDetails')->with($response);
+    }
+
+    public function updateDoctor($id, Request $request)
+    {
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
+
+        $response['doctors'] = UserHelper::getDoctors();
+
+        UserHelper::updateDoctor($id, $request->all());
+
+        return view('admin.doctors')->with($response);
+    }
 }
