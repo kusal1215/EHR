@@ -52,6 +52,11 @@ class AdminController extends ParentAdminController
         return view('admin.doctors')->with($response);
     }
 
+    public function deleteDoctor($id)
+    {
+        UserHelper::delete($id);
+    }
+
     public function addDoctorPage()
     {
 

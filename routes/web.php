@@ -30,6 +30,8 @@ Route::prefix('/ehr')->group(function () {
     Route::get('/admin/doctor', 'AdminController@doctor')->name('AdminManager.doctor');
     Route::get('/admin/addDoctor', 'AdminController@addDoctorPage')->name('AdminManager.addDoctor');
     Route::post('/admin/addDoctorDB', 'AdminController@addDoctorDB')->name('AdminManager.addDoctorToDB');
+    Route::get('/admin/deleteDoctor/{id}', 'AdminController@deleteDoctor')->name('AdminManager.deleteDoctor');
+
 //  appointment part
     Route::get('/admin/appointments', 'AdminAppointmentController@appointment')->name('AdminAppointmentManager.appointments');
     Route::get('/admin/addAppointments', 'AdminAppointmentController@loadAddAppointment')->name('AdminAppointmentManager.addAppointments');
@@ -42,7 +44,7 @@ Route::prefix('/ehr')->group(function () {
 
 //  doctor
     Route::get('/doctor', 'DoctorController@index')->name('DoctorManager.doctor');
-
+    Route::get('/admin/deleteAppointment/{id}', 'AdminAppointmentController@destroy')->name('AdminAppointmentManager.deleteAppointment');
 //  patient
     Route::get('/patient', 'PatientController@index')->name('PatientManager.patient');
 });
