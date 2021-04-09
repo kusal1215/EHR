@@ -14,7 +14,7 @@
                     <h4 class="page-title">Patients</h4>
                 </div>
                 <div class="col-sm-8 col-9 text-right m-b-20">
-                    <a href="{{ route('AdminAppointmentManager.addAppointments') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Appointment</a>
+                    <a href="{{ route('AdminPatientManager.addPatientView') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Patient</a>
                 </div>
             </div>
             <div class="row">
@@ -23,13 +23,12 @@
                         <table class="mydatadable table table-stripped" id="user_table">
                             <thead>
                             <tr>
-                                <th>Appointment ID</th>
+                                <th>Patient ID</th>
                                 <th>Patient Name</th>
-                                <th>Doctor Name</th>
-                                <th>Department</th>
-                                <th>Appointment Date</th>
-                                <th>Appointment Time</th>
-                                <th>Status</th>
+                                <th>Patient Email</th>
+                                <th>Patient phone no</th>
+                                <th>Patient Gender</th>
+                                <th>Patient Address</th>
                                 <th class="text-right">Action</th>
                             </tr>
                             </thead>
@@ -37,17 +36,16 @@
                             @foreach($patients as $patient)
                                 <tr>
                                     <td>{{ $patient -> id }}</td>
-                                    <td><img width="28" height="28" src="/assets/img/user.jpg" class="rounded-circle m-r-5" alt=""></td>
-                                    <td>{{ $patient ->  name }}</td>
-                                    <td>{{ $patient -> email }}</td>
-                                    <td>c</td>
-{{--                                    <td>{{ $appointment -> time }}</td>--}}
-{{--                                    <td><span class="custom-badge {{ $appointment -> seen == false ?'status-red':'status-green'}}">{{ $appointment -> seen == false ?'Pending Appointment':'Completed' }}</span></td>--}}
+                                    <td><img width="28" height="28" src="/assets/img/user.jpg" class="rounded-circle m-r-5" alt="">{{ $patient ->  name }}</td>
+                                    <td>{{ $patient ->  email }}</td>
+                                    <td>{{ $patient ->  phone }}</td>
+                                    <td>{{ $patient ->  gender }}</td>
+                                    <td>{{ $patient ->  address }}</td>
                                     <td class="text-right">
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="{{url('/ehr/admin/editAppointment')}}/{{$patient -> id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="{{url('/ehr/admin/editPatientView')}}/{{$patient -> id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                 <a class="dropdown-item delete" id="{{ $patient -> id }}" href="#" data-toggle="modal"
 
                                                 ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
@@ -93,7 +91,7 @@
                 </div>
             </div>
         </div>
-        <div id="delete_appointment" class="modal fade delete-modal" role="dialog">
+        <div id="delete_patient" class="modal fade delete-modal" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body text-center">
@@ -116,18 +114,18 @@
             $(document).on('click' , '.delete' , function (){
                 user_id = $(this).attr('id');
                 console.log(user_id);
-                $('#delete_appointment').modal('show');
+                $('#delete_patient').modal('show');
             });
 
             $('#ok_button').click(function (){
                 $.ajax({
-                    url:"/ehr/admin/deleteAppointment/"+user_id,
+                    url:"/ehr/admin/deleteDoctor/"+user_id,
                     beforeSend:function (){
                         $('#ok_button').text('Deleting...');
                     },
                     success:function (data){
                         setTimeout(function (){
-                            $('#delete_appointment').modal('hide');
+                            $('#delete_patient').modal('hide');
                             // alert('Data Deleted');
                             window.location.reload();
                         },2000);

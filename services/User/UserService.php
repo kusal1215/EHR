@@ -3,6 +3,7 @@
 namespace services\User;
 
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
@@ -86,6 +87,8 @@ class UserService
             $data['user_image'] = '';
         }
 
+        $data['password'] = Hash::make($data['password']);
+
         $this->create($data);
     }
 
@@ -94,7 +97,30 @@ class UserService
         $doctor = $this->get($id);
 
         if ($doctor) {
+            $data['password'] = Hash::make($data['password']);
+
             $this->update($doctor, $data);
+        }
+    }
+
+    public function addPatient($request)
+    {
+        $data = $request->all();
+
+        $data['password'] = Hash::make($data['password']);
+
+        $this->create($data);
+    }
+
+    public function updatePatient($id, $data)
+    {
+        $patient = $this->get($id);
+
+        if ($patient) {
+
+            $data['password'] = Hash::make($data['password']);
+
+            $this->update($patient, $data);
         }
     }
 }
