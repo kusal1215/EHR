@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    const USER_LEVEL = ['ADMIN' => 1, 'DOCTOR' => 2 , 'PATIENT' => 3];
+    const USER_LEVEL = ['ADMIN' => 1, 'DOCTOR' => 2, 'PATIENT' => 3];
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +18,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'user_level', 'firstname', 'lastname','birthdate' ,'gender' ,
-        'address' ,'spec' , 'city', 'postal_code', 'phone' ,'bio', 'status', 'user_image',
-     ];
+        'name', 'email', 'password', 'user_level', 'firstname', 'lastname', 'birthdate', 'gender',
+        'address', 'spec', 'city', 'postal_code', 'phone', 'bio', 'status', 'user_image',
+    ];
 
 
     /**
@@ -40,4 +40,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function doctor_appointments()
+    {
+        return $this->hasMany('app\Appointment', 'doctor_id');
+    }
+
+    public function patient_appointments()
+    {
+        return $this->hasMany('app\Appointment', 'patient_id');
+    }
 }
