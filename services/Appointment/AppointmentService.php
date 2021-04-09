@@ -95,4 +95,12 @@ class AppointmentService
             $this->update($appointment, $data);
         }
     }
+
+    public function changeSeen($id, $status)
+    {
+        $appointment = $this->get($id);
+
+        $appointment->seen = $status;
+        $appointment->save();
+    }
 }
