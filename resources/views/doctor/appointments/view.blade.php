@@ -1,4 +1,4 @@
-@extends('admin.adminmaster')
+@extends('doctor.doctormaster')
 
 @section('content')
 <div class="page-wrapper">

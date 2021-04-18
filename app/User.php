@@ -43,11 +43,21 @@ class User extends Authenticatable
 
     public function doctor_appointments()
     {
-        return $this->hasMany('app\Appointment', 'doctor_id');
+        return $this->hasMany('App\Appointment', 'doctor_id');
     }
 
     public function patient_appointments()
     {
-        return $this->hasMany('app\Appointment', 'patient_id');
+        return $this->hasMany('App\Appointment', 'patient_id');
+    }
+
+    public function doctor_note()
+    {
+        return $this->hasMany('App\Note', 'doctor_id');
+    }
+
+    public function patient_note()
+    {
+        return $this->hasMany('App\Note', 'patient_id');
     }
 }
