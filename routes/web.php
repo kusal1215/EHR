@@ -54,10 +54,21 @@ Route::prefix('/ehr')->group(function () {
 
     //  doctor
     Route::get('/doctor', 'DoctorController@index')->name('DoctorManager.doctor');
+
+    // doctor appointments
     Route::get('/doctor/appointments', 'DoctorAppointmentController@appointment')->name('DoctorAppointmentManager.appointments');
     Route::get('/doctor/appointments/view/{id}', 'DoctorAppointmentController@appointmentView')->name('DoctorAppointmentManager.appointments.view');
     Route::get('/doctor/appointments/seen/{id}', 'DoctorAppointmentController@appointmentSeen')->name('DoctorAppointmentManager.appointments.seen');
     Route::get('/doctor/appointments/pending/{id}', 'DoctorAppointmentController@appointmentPending')->name('DoctorAppointmentManager.appointments.pending');
+
+    // doctor notes
+    Route::get('/doctor/notes', 'DoctorNoteController@all')->name('DoctorNoteManager.notes.all');
+    Route::get('/doctor/notes/add', 'DoctorNoteController@add')->name('DoctorNoteManager.notes.add');
+    Route::post('/doctor/notes/save', 'DoctorNoteController@save')->name('DoctorNoteManager.notes.save');
+    Route::get('/doctor/notes/edit/{id}', 'DoctorNoteController@edit')->name('DoctorNoteManager.notes.edit');
+    Route::post('/doctor/notes/update/{id}', 'DoctorNoteController@update')->name('DoctorNoteManager.notes.update');
+    Route::get('/doctor/notes/delete/{id}', 'DoctorNoteController@delete')->name('DoctorNoteManager.notes.delete');
+
 
     //  patient
     Route::get('/patient', 'PatientController@index')->name('PatientManager.patient');

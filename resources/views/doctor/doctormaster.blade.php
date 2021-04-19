@@ -176,42 +176,13 @@
                             <a href="{{route('DoctorAppointmentManager.appointments')}}"><i class="fa fa-calendar"></i>
                                 <span>Appointments</span></a>
                         </li>
-                        <li>
-                            <a href="schedule.html"><i class="fa fa-calendar-check-o"></i> <span>Doctor
-                                    Schedule</span></a>
-                        </li>
-                        <li>
-                            <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
+                        <li class="{{ $curr_url=='DoctorNoteManager.notes.all'?'active':''}}">
+                            <a href="{{route('DoctorNoteManager.notes.all')}}"><i class="fa fa-commenting-o"></i>
+                                <span>Notes</span></a>
                         </li>
                         <li class="{{ $curr_url=='/chatify'?'active':''}}">
                             <a href="{{url('/chatify')}}"><i class="fa fa-comments"></i> <span>Chat</span> <span
                                     class="badge badge-pill bg-primary float-right">{{ $count }}</span></a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-video-camera camera"></i> <span> Calls</span> <span
-                                    class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li><a href="voice-call.html">Voice Call</a></li>
-                                <li><a href="video-call.html">Video Call</a></li>
-                                <li><a href="incoming-call.html">Incoming Call</a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-commenting-o"></i> <span> Notes</span> </a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-flag-o"></i> <span> Reports </span> <span
-                                    class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li><a href="expense-reports.html"> Expense Report </a></li>
-                                <li><a href="invoice-reports.html"> Invoice Report </a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="calendar.html"><i class="fa fa-calendar"></i> <span>Calendar</span></a>
-                        </li>
-                        <li>
-                            <a href="settings.html"><i class="fa fa-cog"></i> <span>Settings</span></a>
                         </li>
                     </ul>
                 </div>

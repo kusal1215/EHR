@@ -19,7 +19,7 @@ class DoctorAppointmentController extends ParentDoctorController
 
         $response['appointments'] = AppointmentHelper::getAll();
 
-        return view('doctor.appointment')->with($response);
+        return view('doctor.appointments.all')->with($response);
     }
 
     public function appointmentView($id)
@@ -30,7 +30,7 @@ class DoctorAppointmentController extends ParentDoctorController
 
         $response['appointment'] = AppointmentHelper::get($id);
 
-        return view('doctor.viewAppointment')->with($response);
+        return view('doctor.appointments.view')->with($response);
     }
 
     public function appointmentSeen($id)
