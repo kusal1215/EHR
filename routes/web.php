@@ -69,6 +69,14 @@ Route::prefix('/ehr')->group(function () {
     Route::post('/doctor/notes/update/{id}', 'DoctorNoteController@update')->name('DoctorNoteManager.notes.update');
     Route::get('/doctor/notes/delete/{id}', 'DoctorNoteController@delete')->name('DoctorNoteManager.notes.delete');
 
+    // doctor reports
+    Route::get('/doctor/reports', 'DoctorReportController@all')->name('DoctorReportManager.reports.all');
+    Route::get('/doctor/reports/add', 'DoctorReportController@add')->name('DoctorReportManager.reports.add');
+    Route::post('/doctor/reports/save', 'DoctorReportController@save')->name('DoctorReportManager.reports.save');
+    Route::get('/doctor/reports/edit/{id}', 'DoctorReportController@edit')->name('DoctorReportManager.reports.edit');
+    Route::post('/doctor/reports/update/{id}', 'DoctorReportController@update')->name('DoctorReportManager.reports.update');
+    Route::get('/doctor/reports/view/{id}', 'DoctorReportController@view')->name('DoctorReportManager.reports.view');
+    Route::get('/doctor/reports/delete/{id}', 'DoctorReportController@delete')->name('DoctorReportManager.reports.delete');
 
     //  patient
     Route::get('/patient', 'PatientController@index')->name('PatientManager.patient');

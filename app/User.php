@@ -60,4 +60,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Note', 'patient_id');
     }
+
+    public function doctor_report()
+    {
+        return $this->hasMany('App\Report', 'doctor_id');
+    }
+
+    public function patient_report()
+    {
+        return $this->hasMany('App\Report', 'patient_id');
+    }
 }
