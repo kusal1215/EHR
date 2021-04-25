@@ -180,6 +180,10 @@
                             <a href="{{route('DoctorNoteManager.notes.all')}}"><i class="fa fa-commenting-o"></i>
                                 <span>Notes</span></a>
                         </li>
+                        <li class="{{ $curr_url=='DoctorReportManager.reports.all'?'active':''}}">
+                            <a href="{{route('DoctorReportManager.reports.all')}}"><i class="fa fa-file-text"></i>
+                                <span>Reports</span></a>
+                        </li>
                         <li class="{{ $curr_url=='/chatify'?'active':''}}">
                             <a href="{{url('/chatify')}}"><i class="fa fa-comments"></i> <span>Chat</span> <span
                                     class="badge badge-pill bg-primary float-right">{{ $count }}</span></a>
