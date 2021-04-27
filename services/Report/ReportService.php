@@ -24,6 +24,11 @@ class ReportService
         return $this->report->all();
     }
 
+    public function getReportApi($name, $age)
+    {
+        return $this->report->where('name', $name)->where('age', $age)->orderBy('created_at', 'desc')->first();
+    }
+
     public function create($data)
     {
         return $this->report->create($data);
