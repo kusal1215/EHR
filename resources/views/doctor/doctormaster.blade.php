@@ -13,13 +13,20 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/bootstrap-datetimepicker.min.css')}}">
+    <style>
+        .sidebar {
+            width: 250px !important;
+        }
 
+    </style>
     @yield('header')
 
     <script src="{{asset('/assets/js/html5shiv.min.js')}}"></script>
     <script src="{{asset('/assets/js/respond.min.js')}}"></script>
     @php
     $curr_url = Route::currentRouteName();
+    $app_req_count = services\ModalHelper\RequestAppointmentHelper::getUnseenCount(Auth::user()->id);
+    $rep_req_count = services\ModalHelper\RequestReportHelper::getUnseenCount(Auth::user()->id);
     @endphp
 </head>
 
@@ -183,6 +190,20 @@
                         <li class="{{ $curr_url=='DoctorReportManager.reports.all'?'active':''}}">
                             <a href="{{route('DoctorReportManager.reports.all')}}"><i class="fa fa-file-text"></i>
                                 <span>Reports</span></a>
+                        </li>
+                        <li class="{{ $curr_url=='DoctorAppointmentManager.appointments.requests'?'active':''}}">
+                            <a href="{{route('DoctorAppointmentManager.appointments.requests')}}">
+                                <i class="fa fa-question-circle"></i>
+                                <span>Appointment Requests</span>
+                                <span class="badge badge-pill bg-warning float-right">{{ $app_req_count }}</span>
+                            </a>
+                        </li>
+                        <li class="{{ $curr_url=='DoctorReportManager.reports.requests'?'active':''}}">
+                            <a href="{{route('DoctorReportManager.reports.requests')}}">
+                                <i class="fa fa-question-circle"></i>
+                                <span>Report Requests</span>
+                                <span class="badge badge-pill bg-warning float-right">{{ $rep_req_count }}</span>
+                            </a>
                         </li>
                         <li class="{{ $curr_url=='/chatify'?'active':''}}">
                             <a href="{{url('/chatify')}}"><i class="fa fa-comments"></i> <span>Chat</span> <span

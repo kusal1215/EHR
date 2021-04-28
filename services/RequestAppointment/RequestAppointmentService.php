@@ -3,6 +3,7 @@
 namespace services\RequestAppointment;
 
 use App\RequestAppointment;
+use services\ModalHelper\UserHelper;
 
 class RequestAppointmentService
 {
@@ -55,5 +56,29 @@ class RequestAppointmentService
     {
         $request_appointment = $this->get($id);
         return $request_appointment->delete();
+    }
+
+    public function markSeen($id)
+    {
+        $doctor = UserHelper::get($id);
+
+        foreach ($doctor->doctor_req_appointments as $req_appointment) {
+            $req_appointment->status = RequestAppointment::STATUS['SEEN'];
+            $req_appointment->save();
+        }
+    }
+
+    public function getUnseenCount($id)
+    {
+        $count = 0;
+
+        $doctor = UserHelper::get($id);
+        foreach ($doctor->doctor_req_appointments as $req_appointment) {
+            if ($req_appointment->status == RequestAppointment::STATUS['UNSEEN']) {
+                $count++;
+            }
+        }
+
+        return $count;
     }
 }

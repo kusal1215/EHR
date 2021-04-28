@@ -19,6 +19,7 @@ class CreateRequestAppointmentsTable extends Migration
             $table->bigInteger('patient_id');
             $table->string('date');
             $table->string('time');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

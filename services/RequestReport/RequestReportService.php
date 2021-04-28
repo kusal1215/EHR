@@ -3,6 +3,7 @@
 namespace services\RequestReport;
 
 use App\RequestReport;
+use services\ModalHelper\UserHelper;
 
 class RequestReportService
 {
@@ -55,5 +56,29 @@ class RequestReportService
     {
         $request_report = $this->get($id);
         return $request_report->delete();
+    }
+
+    public function markSeen($id)
+    {
+        $doctor = UserHelper::get($id);
+
+        foreach ($doctor->doctor_req_reports as $req_report) {
+            $req_report->status = RequestReport::STATUS['SEEN'];
+            $req_report->save();
+        }
+    }
+
+    public function getUnseenCount($id)
+    {
+        $count = 0;
+
+        $doctor = UserHelper::get($id);
+        foreach ($doctor->doctor_req_reports as $req_report) {
+            if ($req_report->status == RequestReport::STATUS['UNSEEN']) {
+                $count++;
+            }
+        }
+
+        return $count;
     }
 }

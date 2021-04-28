@@ -9,12 +9,8 @@
     <div class="content">
         <div class="row">
             <div class="col-sm-4 col-3">
-                <h4 class="page-title">Appointments</h4>
+                <h4 class="page-title">Report Requests</h4>
                 <p class="text-success">{{ session('msg') }}</p>
-            </div>
-            <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="{{ route('DoctorAppointmentManager.appointments.add') }}"
-                    class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Appointment</a>
             </div>
         </div>
         <div class="row">
@@ -23,50 +19,28 @@
                     <table class="mydatadable table table-stripped" id="user_table">
                         <thead>
                             <tr>
-                                <th>Appointment ID</th>
+                                <th>ID</th>
                                 <th>Patient Name</th>
-                                <th>Department</th>
-                                <th>Appointment Date</th>
-                                <th>Appointment Time</th>
-                                <th>Status</th>
+                                <th>Details</th>
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(Auth::user()->doctor_appointments as $appointment)
+                            @foreach(Auth::user()->doctor_req_reports as $key => $request_report)
                             <tr>
-                                <td>{{ $appointment->aptId }}</td>
+                                <td>{{ $key+1 }}</td>
                                 <td><img width="28" height="28" src="/assets/img/user.jpg" class="rounded-circle m-r-5"
-                                        alt="">{{ $appointment->patient->name }}</td>
-                                {{-- <td>{{ $appointment -> doctor -> name }}</td> --}}
-                                <td>{{ $appointment->department }}</td>
-                                <td>{{ $appointment->date }}</td>
-                                <td>{{ $appointment->time }}</td>
-                                <td>
-                                    <span
-                                        class="custom-badge {{ $appointment->seen == false ?'status-red':'status-green'}}">{{ $appointment->seen == false ?'Pending Appointment':'Completed' }}
-                                    </span>
-                                </td>
+                                        alt="">{{ $request_report->patient->name }}</td>
+                                <td>{{ $request_report->details }}</td>
                                 <td class="text-right">
                                     <div class="dropdown dropdown-action">
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
                                             aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item"
-                                                href="{{route('DoctorAppointmentManager.appointments.view',$appointment->id)}}">
-                                                <i class="fa fa-eye m-r-5"></i> View
+                                                href="{{route('DoctorReportManager.reports.add',$request_report->id)}}">
+                                                <i class="fa fa-eye m-r-5"></i> Add Report
                                             </a>
-                                            @if ($appointment->seen)
-                                            <a class="dropdown-item"
-                                                href="{{route('DoctorAppointmentManager.appointments.pending',$appointment->id)}}">
-                                                <i class="fa fa-pencil m-r-5"></i> Mark as pending
-                                            </a>
-                                            @else
-                                            <a class="dropdown-item"
-                                                href="{{route('DoctorAppointmentManager.appointments.seen',$appointment->id)}}">
-                                                <i class="fa fa-pencil m-r-5"></i> Mark as completed
-                                            </a>
-                                            @endif
                                         </div>
                                     </div>
                                 </td>

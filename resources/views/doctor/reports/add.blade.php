@@ -20,7 +20,9 @@
                                 <select class="form-control" id="patient_id" name="patient_id" required>
                                     <option>Select</option>
                                     @foreach( $patients as $patient)
-                                    <option value="{{ $patient->id }}">{{ $patient->name }}</option>
+                                    <option value="{{ $patient->id }}"
+                                        {{$request_report && $request_report->patient_id == $patient->id ? 'selected':''}}>
+                                        {{ $patient->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

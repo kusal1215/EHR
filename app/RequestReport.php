@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class RequestReport extends Model
 {
+    const STATUS = ['UNSEEN' => 1, 'SEEN' => 2];
+
     protected $fillable = [
-        'doctor_id', 'patient_id', 'details'
+        'doctor_id', 'patient_id', 'details', 'status'
     ];
 
     public function doctor()
