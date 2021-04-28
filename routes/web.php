@@ -57,9 +57,12 @@ Route::prefix('/ehr')->group(function () {
 
     // doctor appointments
     Route::get('/doctor/appointments', 'DoctorAppointmentController@appointment')->name('DoctorAppointmentManager.appointments');
+    Route::get('/doctor/appointments/add/{id?}', 'DoctorAppointmentController@appointmentAdd')->name('DoctorAppointmentManager.appointments.add');
+    Route::get('/doctor/appointments/store', 'DoctorAppointmentController@appointmentStore')->name('DoctorAppointmentManager.appointments.store');
     Route::get('/doctor/appointments/view/{id}', 'DoctorAppointmentController@appointmentView')->name('DoctorAppointmentManager.appointments.view');
     Route::get('/doctor/appointments/seen/{id}', 'DoctorAppointmentController@appointmentSeen')->name('DoctorAppointmentManager.appointments.seen');
     Route::get('/doctor/appointments/pending/{id}', 'DoctorAppointmentController@appointmentPending')->name('DoctorAppointmentManager.appointments.pending');
+    Route::get('/doctor/appointments/requests', 'DoctorAppointmentController@appointmentRequests')->name('DoctorAppointmentManager.appointments.requests');
 
     // doctor notes
     Route::get('/doctor/notes', 'DoctorNoteController@all')->name('DoctorNoteManager.notes.all');
@@ -71,12 +74,13 @@ Route::prefix('/ehr')->group(function () {
 
     // doctor reports
     Route::get('/doctor/reports', 'DoctorReportController@all')->name('DoctorReportManager.reports.all');
-    Route::get('/doctor/reports/add', 'DoctorReportController@add')->name('DoctorReportManager.reports.add');
+    Route::get('/doctor/reports/add/{id?}', 'DoctorReportController@add')->name('DoctorReportManager.reports.add');
     Route::post('/doctor/reports/save', 'DoctorReportController@save')->name('DoctorReportManager.reports.save');
     Route::get('/doctor/reports/edit/{id}', 'DoctorReportController@edit')->name('DoctorReportManager.reports.edit');
     Route::post('/doctor/reports/update/{id}', 'DoctorReportController@update')->name('DoctorReportManager.reports.update');
     Route::get('/doctor/reports/view/{id}', 'DoctorReportController@view')->name('DoctorReportManager.reports.view');
     Route::get('/doctor/reports/delete/{id}', 'DoctorReportController@delete')->name('DoctorReportManager.reports.delete');
+    Route::get('/doctor/reports/requests', 'DoctorReportController@requests')->name('DoctorReportManager.reports.requests');
 
     //  patient
     Route::get('/patient', 'PatientController@index')->name('PatientManager.patient');

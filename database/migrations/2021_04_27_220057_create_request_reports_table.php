@@ -18,6 +18,7 @@ class CreateRequestReportsTable extends Migration
             $table->bigInteger('doctor_id');
             $table->bigInteger('patient_id');
             $table->text('details');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

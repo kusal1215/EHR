@@ -80,4 +80,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\RequestAppointment', 'patient_id');
     }
+
+    public function doctor_req_reports()
+    {
+        return $this->hasMany('App\RequestReport', 'doctor_id');
+    }
+
+    public function patient_req_reports()
+    {
+        return $this->hasMany('App\RequestReport', 'patient_id');
+    }
 }

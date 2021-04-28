@@ -8,6 +8,7 @@ use services\ModalHelper\MessageHelper;
 use services\ModalHelper\ReportHelper;
 use services\ModalHelper\UserHelper;
 use Barryvdh\DomPDF\Facade as PDF;
+use services\ModalHelper\RequestReportHelper;
 
 class DoctorReportController extends Controller
 {
@@ -20,8 +21,13 @@ class DoctorReportController extends Controller
         return view('doctor.reports.all')->with($response);
     }
 
-    public function add()
+    public function add($id = null)
     {
+        $response['request_report'] = null;
+
+        if ($id) {
+            $response['request_report'] = RequestReportHelper::get($id);
+        }
         $getMessages = MessageHelper::getMessages(Auth::user()->id);
         $response['count'] = $getMessages['count'];
         $response['messages'] = $getMessages['messages'];
@@ -72,5 +78,16 @@ class DoctorReportController extends Controller
         ReportHelper::delete($id);
 
         return redirect(route('DoctorReportManager.reports.all'))->with('msg', 'Report Deleted Successfully.');
+    }
+
+    public function requests()
+    {
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
+
+        RequestReportHelper::markSeen(Auth::user()->id);
+
+        return view('doctor.reports.requests')->with($response);
     }
 }
