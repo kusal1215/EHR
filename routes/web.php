@@ -80,4 +80,16 @@ Route::prefix('/ehr')->group(function () {
 
     //  patient
     Route::get('/patient', 'PatientController@index')->name('PatientManager.patient');
+
+    // patient appointments
+    Route::get('/patient/appointments', 'PatientAppointmentController@appointment')->name('PatientAppointmentManager.appointments');
+    Route::get('/patient/appointments/view/{id}', 'PatientAppointmentController@appointmentView')->name('PatientAppointmentManager.appointments.view');
+    Route::get('/patient/appointments/request', 'PatientAppointmentController@appointmentRequest')->name('PatientAppointmentManager.appointments.request');
+    Route::post('/patient/appointments/request/save', 'PatientAppointmentController@appointmentRequestSave')->name('PatientAppointmentManager.appointments.request.save');
+
+    // patient reports
+    Route::get('/patient/reports', 'PatientReportController@all')->name('PatientReportManager.reports');
+    Route::get('/patient/reports/view/{id}', 'PatientReportController@view')->name('PatientReportManager.reports.view');
+    Route::get('/patient/reports/request', 'PatientReportController@reportRequest')->name('PatientReportManager.reports.request');
+    Route::post('/patient/reports/request/save', 'PatientReportController@reportRequestSave')->name('PatientReportManager.reports.request.save');
 });
