@@ -2,46 +2,72 @@
 
 namespace App\Http\Controllers;
 
-use App\Appointment;
 use App\User;
-use Chatify\Http\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use services\ModalHelper\MessageHelper;
+use services\ModalHelper\UserHelper;
 
 class AdminPatientController extends ParentAdminController
 {
-    public function getMessages()
-    {
-        $messages = Message::join('users',  function ($join) {
-            $join->on('messages.from_id', '=', 'users.id');
-        })
-            ->Where('messages.to_id', Auth::user()->id)
-            ->Where('messages.seen', false)
-            ->orderBy('messages.created_at', 'desc')
-            ->get();
-
-        $count = count($messages);
-
-        return [
-            'count' => $count,
-            'messages' => $messages,
-        ];
-    }
 
     public function patients()
     {
-        $getMessages = $this->getMessages();
-        $count = $getMessages['count'];
-        $messages = $getMessages['messages'];
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
 
-        $patients = User::where('user_level', 3)->get();
+        $response['patients'] = UserHelper::getPatients();
 
-//        dd($user);
+//        dd($response);
 
-        return view('admin.patients.patients',[
-            'count' => $count,
-            'messages' => $messages,
-            'patients' => $patients
-        ]);
+        return view('admin.patients.patients')->with($response);
     }
+
+    public function addPatientView()
+    {
+
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
+
+        return view('admin.patients.addPatient')->with($response);
+    }
+
+    public function addPatient(Request $request)
+    {
+        $user = UserHelper::addPatient($request);
+
+        return redirect('/ehr/admin/addPatientView')->with('msg', 'Data inserted successfully');
+    }
+
+    public function deletePatient($id)
+    {
+        UserHelper::delete($id);
+    }
+
+    public function editPatientView($id)
+    {
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
+
+        $response['patient'] = UserHelper::get($id);
+
+        return view('admin.patients.editPatient')->with($response);
+    }
+
+    public function updatePatient($id, Request $request)
+    {
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
+
+        $response['patients'] = UserHelper::getPatients();
+
+        UserHelper::updatePatient($id, $request->all());
+
+        return view('admin.patients.patients')->with($response);
+    }
+
 }

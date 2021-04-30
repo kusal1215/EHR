@@ -22,7 +22,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Patient Name</label>
-                                    <select class="form-control" id="patientId" name="patientId"  >
+                                    <select class="form-control" id="patient_id" name="patient_id"  >
                                         <option> select </option>
                                         <option selected value="{{ $appointment -> patient -> id }}" readonly="">{{ $appointment -> patient -> name }}</option>
                                     </select>
@@ -33,7 +33,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Department</label><br>
-                                    <select id="dept" name="dept" class="form-control" required >
+                                    <select id="department" name="department" class="form-control" required >
                                         <option> select </option>
                                         <option selected>{{ $appointment -> department }}</option>
                                     </select>
@@ -42,7 +42,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Doctor</label>
-                                    <select id="doctorId" name="doctorId" class="form-control"  required >
+                                    <select id="doctor_id" name="doctor_id" class="form-control"  required >
                                         <option> select </option>
                                         <option selected value="{{ $appointment -> doctor -> id }}">{{ $appointment -> doctor -> name }}</option>
                                     </select>
@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label>Date</label>
                                     <div class="cal-icon">
-                                        <input id="aptDate" name="aptDate" type="text" class="form-control datetimepicker" value="{{ $appointment -> date }}" required>
+                                        <input id="date" name="date" type="text" class="form-control datetimepicker" value="{{ $appointment -> date }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                 <div class="form-group">
                                     <label>Time</label>
                                     <div class="time-icon">
-                                        <input type="text" name="aptTime" class="form-control" id="datetimepicker3" value="{{ $appointment -> time }}" required>
+                                        <input type="text" name="time" class="form-control" id="time" value="{{ $appointment -> time }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -71,30 +71,30 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Patient Email</label>
-                                    <input id="aptEmail" name="aptEmail" class="form-control" type="email" value="{{ $appointment -> patient_email }}" required>
+                                    <input id="patient_email" name="patient_email" class="form-control" type="email" value="{{ $appointment -> patient_email }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Patient Phone Number</label>
-                                    <input  id="aptPhoneNo" name="aptPhoneNo" class="form-control" type="text" value="{{ $appointment -> patient_phone_no }}" required>
+                                    <input  id="patient_phone_no" name="patient_phone_no" class="form-control" type="text" value="{{ $appointment -> patient_phone_no }}" required>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Message</label>
-                            <textarea id="aptMsg" name="aptMsg" cols="30" rows="4" class="form-control" required> {{ $appointment -> message }}</textarea>
+                            <textarea id="message" name="message" cols="30" rows="4" class="form-control" required> {{ $appointment -> message }}</textarea>
                         </div>
                         <div class="form-group">
                             <label class="display-block">Appointment Status</label>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="status" id="product_active" value="0" {{ $appointment -> seen == false ?'checked':''}}>
+                                <input class="form-check-input" type="radio" name="seen" id="seen" value="0" {{ $appointment -> seen == false ?'checked':''}}>
                                 <label class="form-check-label" for="product_active">
                                     Pending Appointment
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="status" id="product_inactive" value="1" {{ $appointment -> seen == true ?'checked':''}}>
+                                <input class="form-check-input" type="radio" name="seen" id="seen" value="1" {{ $appointment -> seen == true ?'checked':''}}>
                                 <label class="form-check-label" for="product_inactive">
                                     Completed
                                 </label>

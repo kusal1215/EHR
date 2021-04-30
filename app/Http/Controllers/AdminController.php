@@ -8,125 +8,95 @@ use Chatify\Http\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use services\ModalHelper\AppointmentHelper;
+use services\ModalHelper\MessageHelper;
+use services\ModalHelper\UserHelper;
 
 class AdminController extends ParentAdminController
 {
-    public function getMessages()
+    public function index()
     {
-        $messages = Message::join('users',  function ($join) {
-            $join->on('messages.from_id', '=', 'users.id');
-        })
-            ->Where('messages.to_id', Auth::user()->id)
-            ->Where('messages.seen', false)
-            ->orderBy('messages.created_at', 'desc')
-            ->get();
 
-        $count = count($messages);
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
 
-        return [
-            'count' => $count,
-            'messages' => $messages,
-        ];
+        $response['doctors'] = UserHelper::getDoctors();
+        $response['patient'] = UserHelper::getPatients();
+
+        $response['attend_patients_count'] = AppointmentHelper::getAttend();
+        $response['pendings_patients_count'] = AppointmentHelper::getPending();
+
+        $response['attend'] = AppointmentHelper::getAttendPaginate();
+        $response['pendings'] = AppointmentHelper::getPendingPaginate();
+
+        $response['appointments'] = AppointmentHelper::getPaginate(5);
+
+        $response['doctors_count'] = count($response['doctors']);
+        $response['patient_count'] = count($response['patient']);
+        $response['attend_count'] = count($response['attend_patients_count']);
+        $response['pending_count'] = count($response['pendings_patients_count']);
+
+        return view('admin.adminhome')->with($response);
     }
 
-    public function index(){
+    public function doctor()
+    {
 
-        $getMessages = $this->getMessages();
-        $count = $getMessages['count'];
-        $messages = $getMessages['messages'];
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
 
-        $doctors = User::where('user_level', 2) ->orderBy('name', 'desc') ->get();
-        $patient = User::where('user_level', 3) ->orderBy('name', 'desc') ->get();
+        $response['doctors'] = UserHelper::getDoctors();
 
-        $attend_patients_count = Appointment::where('seen', 1) -> get();
-        $pendings_patients_count = Appointment::where('seen', 0) -> get();
-
-        $attend = Appointment::where('seen', 1) -> paginate(5);
-        $pendings = Appointment::where('seen', 0) -> paginate(5);
-
-        $appointments = Appointment::paginate(5);
-
-        $doctors_count = count($doctors);
-        $patient_count = count($patient);
-        $attend_count = count($attend_patients_count);
-        $pending_count = count($pendings_patients_count);
-
-        return view('admin.adminhome',[
-            'doctors' => $doctors,
-            'count' => $count,
-            'messages' => $messages,
-            'doctors_count' => $doctors_count,
-            'patient_count' => $patient_count,
-            'attend_count' => $attend_count,
-            'pending_count' => $pending_count,
-            'pendings' => $pendings,
-            'appointments' => $appointments,
-        ]);
+        return view('admin.doctors')->with($response);
     }
 
-    public function doctor(){
-
-        $getMessages = $this->getMessages();
-        $count = $getMessages['count'];
-        $messages = $getMessages['messages'];
-
-        $doctors = User::where('user_level', 2)
-                        ->orderBy('name', 'desc')
-                        ->get();
-
-        return view('admin.doctors' ,[
-            'doctors' => $doctors,
-            'count' => $count,
-            'messages' => $messages,
-        ]);
+    public function deleteDoctor($id)
+    {
+        UserHelper::delete($id);
     }
 
-    public function addDoctorPage(){
+    public function addDoctorPage()
+    {
 
-        $getMessages = $this->getMessages();
-        $count = $getMessages['count'];
-        $messages = $getMessages['messages'];
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
 
-        return view('admin.addDoctor' ,[
-            'count' => $count,
-            'messages' => $messages,
-        ]);
+        return view('admin.addDoctor')->with($response);
     }
 
-    public function addDoctorDB(Request $request){
-        $user = new User();
+    public function addDoctorDB(Request $request)
+    {
+        $user = UserHelper::addDoctor($request);
 
-        $user -> name = request('name');
-        $user -> email = request('email');
-        $user -> user_level = request('user_level');
-        $user -> password = Hash::make(request('password'));
-        $user -> firstname = request('firstname');
-        $user -> lastname = request('lastname');
-        $user -> birthdate = request('birthdate');
-        $user -> gender = request('gender');
-        $user -> address = request('address');
-        $user -> spec = request('spec');
-        $user -> city = request('city');
-        $user -> postal_code = request('postal_code');
-        $user -> phone = request('phone');
-        $user -> bio = request('bio');
-        $user -> status = request('status');
+        return redirect('/ehr/admin/addDoctor')->with('msg', 'Data inserted successfully');
+    }
 
-        if ($request -> hasFile('user_image')) {
-            $file = $request -> file('user_image');
-            $extension = $file -> getClientOriginalExtension(); //getting image extension
-            $filename = time().'.'.$extension;
-            $file -> move('uploads/doctorsProfile', $filename);
-            $user -> user_image = $filename;
-        }
-        else{
-            $user -> user_image = '';
-        }
+    public function editDoctor($id)
+    {
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
 
-//        dd($user);
+        $response['doctor'] = UserHelper::get($id);
 
-        $user->save();
+//        dd($response);
 
-        return redirect('/ehr/admin/addDoctor') -> with('msg','Data inserted successfully');
+        return view('admin.editDoctorDetails')->with($response);
+    }
+
+    public function updateDoctor($id, Request $request)
+    {
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
+
+        $response['doctors'] = UserHelper::getDoctors();
+
+        UserHelper::updateDoctor($id, $request->all());
+
+        return view('admin.doctors')->with($response);
     }
 }

@@ -6,39 +6,17 @@ use App\User;
 use Chatify\Http\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use services\ModalHelper\MessageHelper;
 
 class PatientController extends ParentPatientController
 {
-    public function getMessages()
+
+    public function index()
     {
-        $messages = Message::join('users',  function ($join) {
-            $join->on('messages.from_id', '=', 'users.id');
-        })
-            ->Where('messages.to_id', Auth::user()->id)
-            ->Where('messages.seen', false)
-            ->orderBy('messages.created_at', 'desc')
-            ->get();
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
 
-        $count = count($messages);
-
-        // dd($messages);
-        // dd(count($messages));
-
-        return [
-            'count' => $count,
-            'messages' => $messages,
-        ];
-    }
-
-    public function index(){
-
-        $getMessages = $this->getMessages();
-        $count = $getMessages['count'];
-        $messages = $getMessages['messages'];
-
-        return view('patient.home',[
-            'count' => $count,
-            'messages' => $messages,
-        ]);
+        return view('patient.home')->with($response);
     }
 }
