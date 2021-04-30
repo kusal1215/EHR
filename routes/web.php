@@ -58,7 +58,7 @@ Route::prefix('/ehr')->group(function () {
     // doctor appointments
     Route::get('/doctor/appointments', 'DoctorAppointmentController@appointment')->name('DoctorAppointmentManager.appointments');
     Route::get('/doctor/appointments/add/{id?}', 'DoctorAppointmentController@appointmentAdd')->name('DoctorAppointmentManager.appointments.add');
-    Route::get('/doctor/appointments/store', 'DoctorAppointmentController@appointmentStore')->name('DoctorAppointmentManager.appointments.store');
+    Route::post('/doctor/appointments/store', 'DoctorAppointmentController@appointmentStore')->name('DoctorAppointmentManager.appointments.store');
     Route::get('/doctor/appointments/view/{id}', 'DoctorAppointmentController@appointmentView')->name('DoctorAppointmentManager.appointments.view');
     Route::get('/doctor/appointments/seen/{id}', 'DoctorAppointmentController@appointmentSeen')->name('DoctorAppointmentManager.appointments.seen');
     Route::get('/doctor/appointments/pending/{id}', 'DoctorAppointmentController@appointmentPending')->name('DoctorAppointmentManager.appointments.pending');
