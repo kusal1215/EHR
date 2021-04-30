@@ -1,6 +1,8 @@
 @extends('patient.master')
 
 @section('content')
+<div class="page-wrapper">
+
     <div class="content">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
@@ -46,7 +48,9 @@
                     <div class="card-body">
                         <div class="chart-title">
                             <h4>Patient Total</h4>
-                            <span class="float-right"><i class="fa fa-caret-up" aria-hidden="true"></i> 15% Higher than Last Month</span>
+                            <span class="float-right"><i class="fa fa-caret-up" aria-hidden="true"></i> 15% Higher than
+                                Last
+                                Month</span>
                         </div>
                         <canvas id="linegraph"></canvas>
                     </div>
@@ -73,105 +77,116 @@
             <div class="col-12 col-md-6 col-lg-8 col-xl-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title d-inline-block">Upcoming Appointments</h4> <a href="appointments.html" class="btn btn-primary float-right">View all</a>
+                        <h4 class="card-title d-inline-block">Upcoming Appointments</h4> <a href="appointments.html"
+                            class="btn btn-primary float-right">View all</a>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table mb-0">
                                 <thead class="d-none">
-                                <tr>
-                                    <th>Patient Name</th>
-                                    <th>Doctor Name</th>
-                                    <th>Timing</th>
-                                    <th class="text-right">Status</th>
-                                </tr>
+                                    <tr>
+                                        <th>Patient Name</th>
+                                        <th>Doctor Name</th>
+                                        <th>Timing</th>
+                                        <th class="text-right">Status</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td style="min-width: 200px;">
-                                        <a class="avatar" href="profile.html">B</a>
-                                        <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Appointment With</h5>
-                                        <p>Dr. Cristina Groves</p>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Timing</h5>
-                                        <p>7.00 PM</p>
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="min-width: 200px;">
-                                        <a class="avatar" href="profile.html">B</a>
-                                        <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Appointment With</h5>
-                                        <p>Dr. Cristina Groves</p>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Timing</h5>
-                                        <p>7.00 PM</p>
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="min-width: 200px;">
-                                        <a class="avatar" href="profile.html">B</a>
-                                        <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Appointment With</h5>
-                                        <p>Dr. Cristina Groves</p>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Timing</h5>
-                                        <p>7.00 PM</p>
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="min-width: 200px;">
-                                        <a class="avatar" href="profile.html">B</a>
-                                        <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Appointment With</h5>
-                                        <p>Dr. Cristina Groves</p>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Timing</h5>
-                                        <p>7.00 PM</p>
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="min-width: 200px;">
-                                        <a class="avatar" href="profile.html">B</a>
-                                        <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Appointment With</h5>
-                                        <p>Dr. Cristina Groves</p>
-                                    </td>
-                                    <td>
-                                        <h5 class="time-title p-0">Timing</h5>
-                                        <p>7.00 PM</p>
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td style="min-width: 200px;">
+                                            <a class="avatar" href="profile.html">B</a>
+                                            <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a>
+                                            </h2>
+                                        </td>
+                                        <td>
+                                            <h5 class="time-title p-0">Appointment With</h5>
+                                            <p>Dr. Cristina Groves</p>
+                                        </td>
+                                        <td>
+                                            <h5 class="time-title p-0">Timing</h5>
+                                            <p>7.00 PM</p>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="appointments.html" class="btn btn-outline-primary take-btn">Take
+                                                up</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="min-width: 200px;">
+                                            <a class="avatar" href="profile.html">B</a>
+                                            <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a>
+                                            </h2>
+                                        </td>
+                                        <td>
+                                            <h5 class="time-title p-0">Appointment With</h5>
+                                            <p>Dr. Cristina Groves</p>
+                                        </td>
+                                        <td>
+                                            <h5 class="time-title p-0">Timing</h5>
+                                            <p>7.00 PM</p>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="appointments.html" class="btn btn-outline-primary take-btn">Take
+                                                up</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="min-width: 200px;">
+                                            <a class="avatar" href="profile.html">B</a>
+                                            <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a>
+                                            </h2>
+                                        </td>
+                                        <td>
+                                            <h5 class="time-title p-0">Appointment With</h5>
+                                            <p>Dr. Cristina Groves</p>
+                                        </td>
+                                        <td>
+                                            <h5 class="time-title p-0">Timing</h5>
+                                            <p>7.00 PM</p>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="appointments.html" class="btn btn-outline-primary take-btn">Take
+                                                up</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="min-width: 200px;">
+                                            <a class="avatar" href="profile.html">B</a>
+                                            <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a>
+                                            </h2>
+                                        </td>
+                                        <td>
+                                            <h5 class="time-title p-0">Appointment With</h5>
+                                            <p>Dr. Cristina Groves</p>
+                                        </td>
+                                        <td>
+                                            <h5 class="time-title p-0">Timing</h5>
+                                            <p>7.00 PM</p>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="appointments.html" class="btn btn-outline-primary take-btn">Take
+                                                up</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="min-width: 200px;">
+                                            <a class="avatar" href="profile.html">B</a>
+                                            <h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a>
+                                            </h2>
+                                        </td>
+                                        <td>
+                                            <h5 class="time-title p-0">Appointment With</h5>
+                                            <p>Dr. Cristina Groves</p>
+                                        </td>
+                                        <td>
+                                            <h5 class="time-title p-0">Timing</h5>
+                                            <p>7.00 PM</p>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="appointments.html" class="btn btn-outline-primary take-btn">Take
+                                                up</a>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -188,7 +203,8 @@
                             <li>
                                 <div class="contact-cont">
                                     <div class="float-left user-img m-r-10">
-                                        <a href="profile.html" title="John Doe"><img src="/assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
+                                        <a href="profile.html" title="John Doe"><img src="/assets/img/user.jpg" alt=""
+                                                class="w-40 rounded-circle"><span class="status online"></span></a>
                                     </div>
                                     <div class="contact-info">
                                         <span class="contact-name text-ellipsis">John Doe</span>
@@ -199,7 +215,9 @@
                             <li>
                                 <div class="contact-cont">
                                     <div class="float-left user-img m-r-10">
-                                        <a href="profile.html" title="Richard Miles"><img src="/assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
+                                        <a href="profile.html" title="Richard Miles"><img src="/assets/img/user.jpg"
+                                                alt="" class="w-40 rounded-circle"><span
+                                                class="status offline"></span></a>
                                     </div>
                                     <div class="contact-info">
                                         <span class="contact-name text-ellipsis">Richard Miles</span>
@@ -210,7 +228,8 @@
                             <li>
                                 <div class="contact-cont">
                                     <div class="float-left user-img m-r-10">
-                                        <a href="profile.html" title="John Doe"><img src="/assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status away"></span></a>
+                                        <a href="profile.html" title="John Doe"><img src="/assets/img/user.jpg" alt=""
+                                                class="w-40 rounded-circle"><span class="status away"></span></a>
                                     </div>
                                     <div class="contact-info">
                                         <span class="contact-name text-ellipsis">John Doe</span>
@@ -221,7 +240,9 @@
                             <li>
                                 <div class="contact-cont">
                                     <div class="float-left user-img m-r-10">
-                                        <a href="profile.html" title="Richard Miles"><img src="/assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
+                                        <a href="profile.html" title="Richard Miles"><img src="/assets/img/user.jpg"
+                                                alt="" class="w-40 rounded-circle"><span
+                                                class="status online"></span></a>
                                     </div>
                                     <div class="contact-info">
                                         <span class="contact-name text-ellipsis">Richard Miles</span>
@@ -232,7 +253,8 @@
                             <li>
                                 <div class="contact-cont">
                                     <div class="float-left user-img m-r-10">
-                                        <a href="profile.html" title="John Doe"><img src="/assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
+                                        <a href="profile.html" title="John Doe"><img src="/assets/img/user.jpg" alt=""
+                                                class="w-40 rounded-circle"><span class="status offline"></span></a>
                                     </div>
                                     <div class="contact-info">
                                         <span class="contact-name text-ellipsis">John Doe</span>
@@ -243,7 +265,8 @@
                             <li>
                                 <div class="contact-cont">
                                     <div class="float-left user-img m-r-10">
-                                        <a href="profile.html" title="Richard Miles"><img src="/assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status away"></span></a>
+                                        <a href="profile.html" title="Richard Miles"><img src="/assets/img/user.jpg"
+                                                alt="" class="w-40 rounded-circle"><span class="status away"></span></a>
                                     </div>
                                     <div class="contact-info">
                                         <span class="contact-name text-ellipsis">Richard Miles</span>
@@ -263,48 +286,56 @@
             <div class="col-12 col-md-6 col-lg-8 col-xl-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title d-inline-block">New Patients </h4> <a href="patients.html" class="btn btn-primary float-right">View all</a>
+                        <h4 class="card-title d-inline-block">New Patients </h4> <a href="patients.html"
+                            class="btn btn-primary float-right">View all</a>
                     </div>
                     <div class="card-block">
                         <div class="table-responsive">
                             <table class="table mb-0 new-patient-table">
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <img width="28" height="28" class="rounded-circle" src="/assets/img/user.jpg" alt="">
-                                        <h2>John Doe</h2>
-                                    </td>
-                                    <td>Johndoe21@gmail.com</td>
-                                    <td>+1-202-555-0125</td>
-                                    <td><button class="btn btn-primary btn-primary-one float-right">Fever</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img width="28" height="28" class="rounded-circle" src="/assets/img/user.jpg" alt="">
-                                        <h2>Richard</h2>
-                                    </td>
-                                    <td>Richard123@yahoo.com</td>
-                                    <td>202-555-0127</td>
-                                    <td><button class="btn btn-primary btn-primary-two float-right">Cancer</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img width="28" height="28" class="rounded-circle" src="/user.jpg" alt="">
-                                        <h2>Villiam</h2>
-                                    </td>
-                                    <td>Richard123@yahoo.com</td>
-                                    <td>+1-202-555-0106</td>
-                                    <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img width="28" height="28" class="rounded-circle" src="/assets/img/user.jpg" alt="">
-                                        <h2>Martin</h2>
-                                    </td>
-                                    <td>Richard123@yahoo.com</td>
-                                    <td>776-2323 89562015</td>
-                                    <td><button class="btn btn-primary btn-primary-four float-right">Fever</button></td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            <img width="28" height="28" class="rounded-circle"
+                                                src="/assets/img/user.jpg" alt="">
+                                            <h2>John Doe</h2>
+                                        </td>
+                                        <td>Johndoe21@gmail.com</td>
+                                        <td>+1-202-555-0125</td>
+                                        <td><button class="btn btn-primary btn-primary-one float-right">Fever</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img width="28" height="28" class="rounded-circle"
+                                                src="/assets/img/user.jpg" alt="">
+                                            <h2>Richard</h2>
+                                        </td>
+                                        <td>Richard123@yahoo.com</td>
+                                        <td>202-555-0127</td>
+                                        <td><button class="btn btn-primary btn-primary-two float-right">Cancer</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img width="28" height="28" class="rounded-circle" src="/user.jpg" alt="">
+                                            <h2>Villiam</h2>
+                                        </td>
+                                        <td>Richard123@yahoo.com</td>
+                                        <td>+1-202-555-0106</td>
+                                        <td><button class="btn btn-primary btn-primary-three float-right">Eye</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img width="28" height="28" class="rounded-circle"
+                                                src="/assets/img/user.jpg" alt="">
+                                            <h2>Martin</h2>
+                                        </td>
+                                        <td>Richard123@yahoo.com</td>
+                                        <td>776-2323 89562015</td>
+                                        <td><button class="btn btn-primary btn-primary-four float-right">Fever</button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -389,7 +420,8 @@
                         <a href="{{url('/chatify')}}">
                             <div class="list-item">
                                 <div class="list-left">
-                                    <span class="avatar"><img src="{{ asset('/storage/'.config('chatify.user_avatar.folder').'/'.$message->avatar) }}"></span>
+                                    <span class="avatar"><img
+                                            src="{{ asset('/storage/'.config('chatify.user_avatar.folder').'/'.$message->avatar) }}"></span>
                                 </div>
                                 <div class="list-body">
                                     <span class="message-author">{{ $message -> name }}</span>
@@ -408,5 +440,5 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 @endsection

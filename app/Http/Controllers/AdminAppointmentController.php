@@ -8,160 +8,89 @@ use Chatify\Http\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use services\ModalHelper\AppointmentHelper;
+use services\ModalHelper\MessageHelper;
+use services\ModalHelper\UserHelper;
+
 use function PHPUnit\Framework\isEmpty;
 
 class AdminAppointmentController extends ParentAdminController
 {
-    public function getMessages()
-    {
-        $messages = Message::join('users',  function ($join) {
-            $join->on('messages.from_id', '=', 'users.id');
-        })
-            ->Where('messages.to_id', Auth::user()->id)
-            ->Where('messages.seen', false)
-            ->orderBy('messages.created_at', 'desc')
-            ->get();
-
-        $count = count($messages);
-
-        return [
-            'count' => $count,
-            'messages' => $messages,
-        ];
-    }
-
     public function appointment()
     {
-        $getMessages = $this->getMessages();
-        $count = $getMessages['count'];
-        $messages = $getMessages['messages'];
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
 
-        $appointments = Appointment::all();
+        $response['appointments'] = AppointmentHelper::getAll();
 
-        return view('admin.appointment',[
-            'count' => $count,
-            'messages' => $messages,
-            'appointments' => $appointments
-        ]);
+        return view('admin.appointment')->with($response);
     }
 
     public function loadAddAppointment()
     {
-        $number = 0;
+        $response['number'] = 0;
 
-        $getMessages = $this->getMessages();
-        $count = $getMessages['count'];
-        $messages = $getMessages['messages'];
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
 
-        $patients = User::where('user_level', 3) ->get();
-        $doctors = User::where('user_level', 2) ->get();
+        $response['patients'] = UserHelper::getPatients();
+        $response['doctors'] = UserHelper::getDoctors();
 
-        $appointment = DB::table('appointments')->orderBy('updated_at', 'desc')->first();
-        $appointments = Appointment::all();
+        $response['appointment'] = AppointmentHelper::getLast();
+        $response['appointments'] = AppointmentHelper::getAll();
 
-        if ($appointments ->isEmpty())
-        {
-            $number =  $number + 1;
-        }
-        else{
-            $number =  $number + $appointment->id + 1;
+        if ($response['appointments']->isEmpty()) {
+            $response['number'] =  $response['number'] + 1;
+        } else {
+            $response['number'] =  $response['number'] + $response['appointment']->id + 1;
         }
 
-        return view('admin.addAppointment',[
-            'count' => $count,
-            'messages' => $messages,
-            'patients' => $patients,
-            'doctors' => $doctors,
-            'number' => $number,
-        ]);
+        return view('admin.addAppointment')->with($response);
     }
 
     public function addAppointmentDB(Request $request)
     {
-        $appointments = Appointment::all();
+        $response['appointments'] = AppointmentHelper::getAll();
 
-        $getMessages = $this->getMessages();
-        $count = $getMessages['count'];
-        $messages = $getMessages['messages'];
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
 
-        $appointment = new Appointment();
+        $response['appointment'] = AppointmentHelper::create($request->all());
 
-        $appointment -> aptId = request('aptId');
-        $appointment -> patient_id = request('patientId');
-        $appointment -> department = request('dept');
-        $appointment -> doctor_id = request('doctorId');
-        $appointment -> date = request('aptDate');
-        $appointment -> time = request('aptTime');
-        $appointment -> patient_email = request('aptEmail');
-        $appointment -> patient_phone_no = request('aptPhoneNo');
-        $appointment -> message = request('aptMsg');
-
-//        dd($appointment);
-
-        $appointment -> save();
-
-        return redirect('/ehr/admin/appointments') -> with([
-            'count' => $count,
-            'messages' => $messages,
-            'appointments' => $appointments
-        ]);
-
+        return redirect('/ehr/admin/appointments')->with($response);
     }
 
     public function destroy($id)
     {
-        $data = Appointment::findOrFail($id);
-        $data->delete();
+        AppointmentHelper::delete($id);
     }
 
-    public function editAppointment($id) {
+    public function editAppointment($id)
+    {
 
-        $getMessages = $this->getMessages();
-        $count = $getMessages['count'];
-        $messages = $getMessages['messages'];
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
 
-        $appointment = Appointment::findorFail($id);
+        $response['appointment'] = AppointmentHelper::get($id);
 
-        return view('admin.editAppointment', [
-            'count' => $count,
-            'messages' => $messages,
-            'appointment' => $appointment,
-        ]);
-
+        return view('admin.editAppointment')->with($response);
     }
 
-    public function updateAppointment($id){
+    public function updateAppointment($id, Request $request)
+    {
 
-        $getMessages = $this->getMessages();
-        $count = $getMessages['count'];
-        $messages = $getMessages['messages'];
+        $getMessages = MessageHelper::getMessages(Auth::user()->id);
+        $response['count'] = $getMessages['count'];
+        $response['messages'] = $getMessages['messages'];
 
-        $appointments = Appointment::all();
+        $response['appointments'] = AppointmentHelper::getAll();
 
-        $appointment = Appointment::findorFail($id);
-        if(!is_null($appointment)){
+        AppointmentHelper::updateAppointment($id, $request->all());
 
-            $appointment -> aptId = request('aptId');
-            $appointment -> patient_id = request('patientId');
-            $appointment -> department = request('dept');
-            $appointment -> doctor_id = request('doctorId');
-            $appointment -> date = request('aptDate');
-            $appointment -> time = request('aptTime');
-            $appointment -> patient_email = request('aptEmail');
-            $appointment -> patient_phone_no = request('aptPhoneNo');
-            $appointment -> message = request('aptMsg');
-            $appointment -> seen = request('status');
-
-//            dd($appointment);
-
-            $appointment->update();
-        }
-
-        return redirect('/ehr/admin/appointments') -> with([
-            'count' => $count,
-            'messages' => $messages,
-            'appointments' => $appointments
-        ]);
+        return redirect('/ehr/admin/appointments')->with($response);
     }
-
 }
