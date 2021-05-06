@@ -82,6 +82,9 @@ Route::prefix('/ehr')->group(function () {
     Route::get('/doctor/reports/delete/{id}', 'DoctorReportController@delete')->name('DoctorReportManager.reports.delete');
     Route::get('/doctor/reports/requests', 'DoctorReportController@requests')->name('DoctorReportManager.reports.requests');
 
+    // doctor video
+    Route::get('/doctor/video', 'DoctorVideoController@video')->name('DoctorVideoManager.video.video');
+
     //  patient
     Route::get('/patient', 'PatientController@index')->name('PatientManager.patient');
 
@@ -96,4 +99,7 @@ Route::prefix('/ehr')->group(function () {
     Route::get('/patient/reports/view/{id}', 'PatientReportController@view')->name('PatientReportManager.reports.view');
     Route::get('/patient/reports/request', 'PatientReportController@reportRequest')->name('PatientReportManager.reports.request');
     Route::post('/patient/reports/request/save', 'PatientReportController@reportRequestSave')->name('PatientReportManager.reports.request.save');
+
+    // doctor video
+    Route::get('/patient/video', 'PatientVideoController@video')->name('PatientVideoManager.video.video');
 });

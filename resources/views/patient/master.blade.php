@@ -87,6 +87,12 @@
                             <a href="{{route('PatientReportManager.reports')}}"><i class="fa fa-file-text"></i>
                                 <span>Reports</span></a>
                         </li>
+                        <li class="{{ $curr_url=='PatientVideoManager.video.video'?'active':''}}">
+                            <a href="{{route('PatientVideoManager.video.video')}}">
+                                <i class="fa fa-video-camera"></i>
+                                <span>Video Call</span>
+                            </a>
+                        </li>
                         <li class="{{ $curr_url=='/chatify'?'active':''}}">
                             <a href="{{url('/chatify')}}"><i class="fa fa-comments"></i> <span>Chat</span> <span
                                     class="badge badge-pill bg-primary float-right">{{ $count }}</span></a>
@@ -108,6 +114,7 @@
     <script src="{{asset('/assets/js/select2.min.js')}}"></script>
     <script src="{{asset('/assets/js/moment.min.js')}}"></script>
     <script src="{{asset('/assets/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script src="//media.twiliocdn.com/sdk/js/video/v1/twilio-video.min.js"></script>
     <script>
         $(function () {
             $('#datetimepicker3').datetimepicker({
