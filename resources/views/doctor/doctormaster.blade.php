@@ -55,9 +55,9 @@
                         <span>{{ Auth::user()->name }}</span>
                     </a>
                     <div class="dropdown-menu">
-{{--                        <a class="dropdown-item" href="profile.html">My Profile</a>--}}
-{{--                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>--}}
-{{--                        <a class="dropdown-item" href="settings.html">Settings</a>--}}
+                        {{--                        <a class="dropdown-item" href="profile.html">My Profile</a>--}}
+                        {{--                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>--}}
+                        {{--                        <a class="dropdown-item" href="settings.html">Settings</a>--}}
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
@@ -115,6 +115,12 @@
                                 <span class="badge badge-pill bg-warning float-right">{{ $rep_req_count }}</span>
                             </a>
                         </li>
+                        <li class="{{ $curr_url=='DoctorVideoManager.video.video'?'active':''}}">
+                            <a href="{{route('DoctorVideoManager.video.video')}}">
+                                <i class="fa fa-video"></i>
+                                <span>Video Call</span>
+                            </a>
+                        </li>
                         <li class="{{ $curr_url=='/chatify'?'active':''}}">
                             <a href="{{url('/chatify')}}"><i class="fa fa-comments"></i> <span>Chat</span> <span
                                     class="badge badge-pill bg-primary float-right">{{ $count }}</span></a>
@@ -136,6 +142,7 @@
     <script src="{{asset('/assets/js/select2.min.js')}}"></script>
     <script src="{{asset('/assets/js/moment.min.js')}}"></script>
     <script src="{{asset('/assets/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script src="//media.twiliocdn.com/sdk/js/video/v1/twilio-video.min.js"></script>
     <script>
         $(function () {
             $('#datetimepicker3').datetimepicker({
