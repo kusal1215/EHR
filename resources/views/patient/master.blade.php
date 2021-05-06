@@ -89,7 +89,7 @@
                         </li>
                         <li class="{{ $curr_url=='PatientVideoManager.video.video'?'active':''}}">
                             <a href="{{route('PatientVideoManager.video.video')}}">
-                                <i class="fa fa-video"></i>
+                                <i class="fa fa-video-camera"></i>
                                 <span>Video Call</span>
                             </a>
                         </li>
